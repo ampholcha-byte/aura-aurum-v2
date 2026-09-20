@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html lang="th"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>QR Payment - หน้าออมทอง</title>
+<!-- Google Fonts: Sarabun -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Sarabun', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              gold: '#D4A045',
+              goldHover: '#C28E34',
+              goldLight: '#FDF6E9',
+              goldBorder: '#EED9B2',
+              burgundy: '#331215',
+              burgundyDark: '#22080B',
+              burgundySoft: '#561F25',
+              cream: '#FBF8F5',
+              creamDark: '#F4ECE4',
+              redAlert: '#D32F2F',
+            }
+          },
+          boxShadow: {
+            'modal': '0 25px 50px -12px rgba(51, 18, 21, 0.35)',
+            'gold-glow': '0 6px 20px -2px rgba(212, 160, 69, 0.45)',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-scroll-and-defaults">
+    body {
+      font-family: 'Sarabun', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      background-color: #1a1515;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex justify-center items-center p-0 m-0 select-none bg-neutral-900">
+<!-- BEGIN: MobileContainer -->
+<!-- 390px Mobile Viewport Container mimicking iPhone 13/14/15 screen -->
+<main class="relative w-[390px] h-[844px] overflow-hidden bg-brand-cream shadow-2xl flex flex-col justify-between">
+<!-- BEGIN: BackgroundScreenContent -->
+<!-- Dimmed and blurred reproduction of gold savings dashboard from SCREEN_8 -->
+<div aria-hidden="true" class="absolute inset-0 z-0 filter blur-[2px] opacity-40 pointer-events-none select-none overflow-hidden">
+<!-- iOS Status Bar -->
+<div class="h-11 px-7 flex justify-between items-center text-xs font-semibold text-neutral-800 pt-1">
+<span>09:41</span>
+<div class="flex items-center gap-1.5">
+<svg class="w-4 h-4 text-neutral-800" fill="currentColor" viewbox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path></svg>
+<svg class="w-4 h-4 text-neutral-800" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M17.778 8.222c-4.296-4.296-11.26-4.296-15.556 0A1 1 0 01.808 6.808c5.076-5.077 13.308-5.077 18.384 0a1 1 0 01-1.414 1.414zM14.95 11.05a7 7 0 00-9.9 0 1 1 0 01-1.414-1.414 9 9 0 0112.728 0 1 1 0 01-1.414 1.414zm-2.829 2.828a3 3 0 00-4.242 0 1 1 0 01-1.415-1.414 5 5 0 017.072 0 1 1 0 01-1.415 1.414zM9 16a1 1 0 112 0 1 1 0 01-2 0z" fill-rule="evenodd"></path></svg>
+<div class="w-5 h-2.5 border border-neutral-800 rounded-sm p-[1px] flex items-center">
+<div class="h-full w-3.5 bg-neutral-800 rounded-2xs"></div>
+</div>
+</div>
+</div>
+<!-- Header -->
+<header class="px-5 py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-brand-burgundy flex items-center justify-center text-brand-gold font-bold text-lg border-2 border-brand-gold/40">
+            ฿
+          </div>
+<div>
+<div class="flex items-center gap-1.5 font-bold text-neutral-900 leading-tight text-sm">
+<span>ทองแท้ 96.5%</span>
+</div>
+<p class="text-[11px] text-neutral-500 font-medium">by SHINGOLD</p>
+</div>
+</div>
+<div class="flex items-center gap-1 bg-green-50 text-green-700 border border-green-200 px-3 py-1 rounded-full text-xs font-semibold">
+<svg class="w-3.5 h-3.5 text-green-600" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path></svg>
+<span>ยืนยันตัวตนแล้ว</span>
+</div>
+</header>
+<!-- Dashboard Title -->
+<div class="px-6 pt-3 pb-2">
+<h1 class="text-2xl font-bold text-neutral-900 tracking-tight">ออมทอง</h1>
+<p class="text-xs text-neutral-500">จัดการทองสะสมและแผนการออมของคุณ</p>
+</div>
+<!-- Dashboard Gold Balance Card -->
+<div class="mx-5 my-2 p-5 rounded-3xl bg-brand-burgundy text-white relative shadow-lg">
+<div class="flex justify-between items-start">
+<span class="text-xs text-brand-gold font-light">ทองสะสมทั้งหมด</span>
+<span class="bg-brand-burgundySoft text-brand-gold text-[10px] px-2.5 py-0.5 rounded-full border border-brand-gold/20">ทองคำแท่ง 96.5%</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-3xl font-extrabold tracking-tight text-white">0.0133</span>
+<span class="text-sm font-semibold text-brand-gold">กรัม</span>
+</div>
+<p class="text-[11px] text-neutral-300 mt-1">มูลค่าโดยประมาณ ≈ ฿450.84 THB</p>
+</div>
+<!-- Recent Transactions Mockup -->
+<div class="px-5 mt-5 space-y-3">
+<div class="flex justify-between text-xs text-neutral-400 font-semibold px-1">
+<span>ประวัติทำรายการ</span>
+<span class="text-brand-gold">ดูทั้งหมด</span>
+</div>
+<div class="bg-white/80 p-3.5 rounded-2xl flex items-center justify-between border border-neutral-100 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-brand-goldLight flex items-center justify-center text-brand-gold font-bold">●</div>
+<div>
+<p class="text-xs font-bold text-neutral-800">ออมทอง 96.5%</p>
+<p class="text-[10px] text-neutral-400">22 ก.พ. 2024 • 10:30 น.</p>
+</div>
+</div>
+<span class="text-xs font-bold text-green-600">+0.0124 กรัม</span>
+</div>
+</div>
+</div>
+<!-- END: BackgroundScreenContent -->
+<!-- BEGIN: BackdropDimOverlay -->
+<!-- Dim backdrop consistent with SCREEN_8 -->
+<div aria-hidden="true" class="absolute inset-0 bg-neutral-950/45 backdrop-blur-[3px] z-10 transition-opacity duration-200"></div>
+<!-- END: BackdropDimOverlay -->
+<!-- BEGIN: ModalOverlay -->
+<!-- Modal Container Centered on 390px Canvas -->
+<div class="relative z-20 w-full h-full flex items-center justify-center p-4">
+<!-- Modal Card -->
+<section class="w-full max-w-[358px] bg-brand-cream border border-brand-goldBorder/70 rounded-[28px] shadow-modal px-5 pt-5 pb-6 flex flex-col items-center animate-in fade-in zoom-in-95 duration-200" data-purpose="qr-payment-modal">
+<!-- Modal Top Header -->
+<div class="w-full flex items-center justify-between pb-3 border-b border-stone-200/60">
+<h2 class="text-xl font-bold text-brand-burgundy tracking-tight">QR Payment</h2>
+<button aria-label="ปิดหน้าต่าง" class="w-8 h-8 rounded-full bg-stone-200/60 hover:bg-stone-300 active:scale-95 transition flex items-center justify-center text-neutral-600 text-sm font-bold" type="button">
+            ✕
+          </button>
+</div>
+<!-- Thai QR / PromptPay Container -->
+<div class="w-full mt-4 flex flex-col items-center">
+<!-- PromptPay QR Frame Card -->
+<div class="w-full bg-white rounded-2xl border border-stone-200/90 shadow-sm overflow-hidden flex flex-col items-center">
+<!-- PromptPay Blue Branding Banner -->
+<div class="w-full bg-[#1A3762] py-2 px-4 flex items-center justify-center gap-2">
+<!-- PromptPay emblem icon vector -->
+<svg class="w-4 h-4 text-white fill-current" viewbox="0 0 24 24">
+<path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5zm0 18c-3.75-1-6.9-4.85-7-9.5V8.3l7-3.89 7 3.89V10.5c-.1 4.65-3.25 8.5-7 9.5z"></path>
+<path d="M12 6.5l-4 4 1.41 1.41L11 10.33V17h2v-6.67l1.59 1.58L16 10.5z"></path>
+</svg>
+<span class="text-white font-semibold text-xs tracking-wider uppercase">Thai QR Payment / PromptPay</span>
+</div>
+<!-- QR Code Scan Area -->
+<div class="p-4 flex flex-col items-center justify-center">
+<!-- Scan frame wrapper with crisp QR placeholder pattern -->
+<div class="relative p-2.5 bg-white rounded-xl border-2 border-dashed border-stone-300">
+<!-- Corner Guides -->
+<div class="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-brand-gold"></div>
+<div class="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-brand-gold"></div>
+<div class="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-brand-gold"></div>
+<div class="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-brand-gold"></div>
+<!-- High-fidelity crisp SVG QR Matrix -->
+<svg class="w-44 h-44" fill="none" viewbox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+<!-- Background -->
+<rect fill="white" height="160" width="160"></rect>
+<!-- Top Left Finder Pattern -->
+<rect fill="#22080B" height="38" rx="4" width="38" x="10" y="10"></rect>
+<rect fill="white" height="28" rx="2" width="28" x="15" y="15"></rect>
+<rect fill="#22080B" height="18" rx="1.5" width="18" x="20" y="20"></rect>
+<!-- Top Right Finder Pattern -->
+<rect fill="#22080B" height="38" rx="4" width="38" x="112" y="10"></rect>
+<rect fill="white" height="28" rx="2" width="28" x="117" y="15"></rect>
+<rect fill="#22080B" height="18" rx="1.5" width="18" x="122" y="20"></rect>
+<!-- Bottom Left Finder Pattern -->
+<rect fill="#22080B" height="38" rx="4" width="38" x="10" y="112"></rect>
+<rect fill="white" height="28" rx="2" width="28" x="15" y="117"></rect>
+<rect fill="#22080B" height="18" rx="1.5" width="18" x="20" y="122"></rect>
+<!-- Standard QR Matrix Data Blocks -->
+<!-- Top row blocks -->
+<rect fill="#22080B" height="6" width="6" x="56" y="12"></rect>
+<rect fill="#22080B" height="6" width="6" x="68" y="12"></rect>
+<rect fill="#22080B" height="6" width="6" x="80" y="12"></rect>
+<rect fill="#22080B" height="6" width="6" x="94" y="12"></rect>
+<rect fill="#22080B" height="12" width="6" x="56" y="24"></rect>
+<rect fill="#22080B" height="6" width="12" x="74" y="24"></rect>
+<rect fill="#22080B" height="6" width="8" x="92" y="24"></rect>
+<rect fill="#22080B" height="8" width="8" x="62" y="38"></rect>
+<rect fill="#22080B" height="12" width="6" x="80" y="36"></rect>
+<rect fill="#22080B" height="6" width="6" x="96" y="40"></rect>
+<!-- Center Matrix -->
+<rect fill="#22080B" height="14" width="6" x="16" y="56"></rect>
+<rect fill="#22080B" height="6" width="12" x="28" y="60"></rect>
+<rect fill="#22080B" height="8" width="8" x="44" y="54"></rect>
+<rect fill="#22080B" height="8" width="8" x="60" y="56"></rect>
+<rect fill="#22080B" height="6" width="12" x="74" y="54"></rect>
+<rect fill="#22080B" height="12" width="6" x="92" y="58"></rect>
+<rect fill="#22080B" height="6" width="14" x="110" y="56"></rect>
+<rect fill="#22080B" height="8" width="12" x="134" y="60"></rect>
+<!-- Mid section -->
+<rect fill="#22080B" height="6" width="14" x="14" y="78"></rect>
+<rect fill="#22080B" height="8" width="8" x="36" y="74"></rect>
+<rect fill="#22080B" height="14" width="6" x="50" y="78"></rect>
+<rect fill="#22080B" height="10" width="10" x="64" y="72"></rect>
+<rect fill="#22080B" height="6" width="12" x="86" y="76"></rect>
+<rect fill="#22080B" height="14" width="8" x="106" y="72"></rect>
+<rect fill="#22080B" height="6" width="14" x="124" y="78"></rect>
+<rect fill="#22080B" height="12" width="6" x="144" y="74"></rect>
+<!-- Lower Section -->
+<rect fill="#22080B" height="8" width="8" x="18" y="96"></rect>
+<rect fill="#22080B" height="6" width="14" x="34" y="94"></rect>
+<rect fill="#22080B" height="14" width="8" x="56" y="98"></rect>
+<rect fill="#22080B" height="8" width="6" x="72" y="94"></rect>
+<rect fill="#22080B" height="6" width="14" x="86" y="98"></rect>
+<rect fill="#22080B" height="12" width="12" x="112" y="94"></rect>
+<rect fill="#22080B" height="14" width="6" x="132" y="96"></rect>
+<rect fill="#22080B" height="6" width="6" x="144" y="94"></rect>
+<!-- Bottom Right Matrix -->
+<rect fill="#22080B" height="6" width="14" x="56" y="118"></rect>
+<rect fill="#22080B" height="12" width="8" x="76" y="116"></rect>
+<rect fill="#22080B" height="6" width="12" x="92" y="114"></rect>
+<rect fill="#22080B" height="14" width="6" x="112" y="118"></rect>
+<rect fill="#22080B" height="6" width="14" x="126" y="116"></rect>
+<rect fill="#22080B" height="12" width="8" x="60" y="132"></rect>
+<rect fill="#22080B" height="6" width="14" x="74" y="136"></rect>
+<rect fill="#22080B" height="14" width="8" x="96" y="130"></rect>
+<rect fill="#22080B" height="6" width="14" x="112" y="138"></rect>
+<rect fill="#22080B" height="12" width="12" x="134" y="132"></rect>
+<!-- Center Logo Badge -->
+<rect fill="white" height="28" rx="6" stroke="#E5E7EB" stroke-width="1.5" width="28" x="66" y="66"></rect>
+<circle cx="80" cy="80" fill="#D4A045" r="10"></circle>
+<text fill="white" font-family="'Sarabun', sans-serif" font-size="10" font-weight="bold" text-anchor="middle" x="80" y="84">฿</text>
+</svg>
+</div>
+<!-- Merchant Name -->
+<p class="text-[11px] text-neutral-400 font-medium mt-2">SHINGOLD SAVINGS CO., LTD.</p>
+</div>
+</div>
+<!-- Transaction Amount Details -->
+<div class="mt-3.5 text-center">
+<p class="text-base font-bold text-brand-burgundy tracking-tight">
+              จำนวน <span class="text-brand-burgundy font-extrabold text-lg">10,000 THB</span> = <span class="text-brand-burgundy">0.2014 กรัม</span>
+</p>
+<!-- Countdown Timer Notice -->
+<p class="text-xs text-neutral-600 mt-1 font-medium flex items-center justify-center gap-1">
+<span>กรุณาชำระเงินภายในเวลา</span>
+<span class="text-brand-redAlert font-bold text-sm tracking-wide">10:00</span>
+<span>นาที</span>
+</p>
+</div>
+</div>
+<!-- BEGIN: ActionButtons -->
+<div class="w-full mt-5 space-y-2.5">
+<!-- Primary CTA Button: Save QR Code -->
+<button class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#DFB35A] via-[#D4A045] to-[#B8872E] hover:brightness-105 active:scale-[0.99] text-brand-burgundyDark font-bold text-base shadow-gold-glow flex items-center justify-center gap-2 transition duration-150" type="button">
+<!-- Download / Save Icon -->
+<svg class="w-5 h-5 text-brand-burgundyDark" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24">
+<path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2m-4-5l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>บันทึก QR Code / Save QR Code</span>
+</button>
+<!-- Secondary Close Button -->
+<button class="w-full py-2.5 px-4 rounded-xl text-neutral-500 hover:text-neutral-800 active:bg-stone-200/40 font-semibold text-sm transition text-center" type="button">
+            ปิด
+          </button>
+</div>
+<!-- END: ActionButtons -->
+</section>
+</div>
+<!-- END: ModalOverlay -->
+<!-- BEGIN: BottomNavigationMockup -->
+<!-- Mimicking tab bar underneath dialog for realistic context -->
+<nav class="relative z-0 bg-white/95 border-t border-stone-200 h-16 px-6 flex justify-between items-center text-[10px] text-neutral-400 font-medium">
+<div class="flex flex-col items-center gap-1 opacity-40">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+<span>หน้าแรก</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-brand-burgundy font-bold opacity-40">
+<svg class="w-5 h-5 text-brand-gold" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+<span>ออมทอง</span>
+</div>
+<div class="flex flex-col items-center gap-1 opacity-40">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+<span>พอร์ตลงทุน</span>
+</div>
+<div class="flex flex-col items-center gap-1 opacity-40">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+<span>ประวัติ</span>
+</div>
+<div class="flex flex-col items-center gap-1 opacity-40">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+<span>โปรไฟล์</span>
+</div>
+</nav>
+<!-- END: BottomNavigationMockup -->
+<!-- iOS Home Indicator -->
+<div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-stone-300 rounded-full pointer-events-none z-30"></div>
+</main>
+<!-- END: MobileContainer -->
+</body></html>

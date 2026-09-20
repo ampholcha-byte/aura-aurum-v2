@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="th"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ออมทอง - ระบบออมทองออนไลน์</title>
+<!-- Google Fonts: Sarabun -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Sarabun', 'sans-serif'],
+          },
+          colors: {
+            'app-bg': '#FAF6EE',
+            'burgundy': {
+              900: '#34050D',
+              800: '#4A0813',
+              700: '#5F0C1B',
+            },
+            'gold': {
+              100: '#FDF7E7',
+              200: '#F9EBC5',
+              300: '#ECCF89',
+              400: '#E1B855',
+              500: '#D4AF37',
+              600: '#B8860B',
+              700: '#946B05',
+            },
+            'subtle-border': 'rgba(212, 175, 55, 0.28)',
+          }
+        }
+      }
+    };
+  </script>
+<!-- Custom Styles: General Layout & Micro-details -->
+<style data-purpose="layout">
+    body {
+      background-color: #EDE8DC;
+      font-family: 'Sarabun', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    .mobile-frame {
+      width: 100%;
+      max-width: 390px;
+      min-height: 100vh;
+      background-color: #FAF6EE;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(74, 8, 19, 0.08);
+      display: flex;
+      flex-direction: column;
+    }
+    .safe-bottom {
+      padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 68px);
+    }
+  </style>
+</head>
+<body class="text-stone-800">
+<div class="mobile-frame">
+<!-- BEGIN: TopStatusBar -->
+<!-- Mimics native iOS status bar space -->
+<div class="w-full flex justify-between items-center px-6 pt-3 pb-1 text-xs text-stone-800 font-medium tracking-tight">
+<span class="">09:41</span>
+<div class="flex items-center space-x-1.5">
+<!-- Cellular Icon -->
+<svg class="w-4 h-3.5 fill-current" viewbox="0 0 17 12">
+<rect height="4" rx="0.5" width="2.5" x="0" y="8"></rect>
+<rect height="6.5" rx="0.5" width="2.5" x="4.5" y="5.5"></rect>
+<rect height="9" rx="0.5" width="2.5" x="9" y="3"></rect>
+<rect height="12" rx="0.5" width="2.5" x="13.5" y="0"></rect>
+</svg>
+<!-- Wifi Icon -->
+<svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 24 24">
+<path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4zm0 3.5c3.55 0 6.77 1.41 9.15 3.71L12 19.34 2.85 11.21C5.23 8.91 8.45 7.5 12 7.5z"></path>
+</svg>
+<!-- Battery Icon -->
+<svg class="w-5 h-3 fill-current" viewbox="0 0 24 12">
+<rect fill="none" height="12" rx="3" stroke="currentColor" stroke-width="1.8" width="20" x="0" y="0"></rect>
+<rect height="8" rx="1.5" width="14" x="2" y="2"></rect>
+<path d="M22 4.5v3a1.5 1.5 0 0 1-1.5 1.5V3A1.5 1.5 0 0 1 22 4.5z"></path>
+</svg>
+</div>
+</div>
+<!-- END: TopStatusBar -->
+<!-- BEGIN: MainHeader -->
+<header class="px-5 py-3 flex items-center justify-between border-b border-gold-300/20 bg-[#FAF6EE]/80 backdrop-blur-sm sticky top-0 z-20"><div class="flex items-center gap-2.5"><div class="relative w-10 h-10 rounded-full p-[1.5px] bg-gradient-to-tr from-[#B68427] via-[#F4DE94] to-[#A7761B] shadow-sm flex-shrink-0"><img alt="DEEGGOLD Logo" class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqxEOlvJTi5zQHPImPLAIdVAk8eYOi4C5j4k2QWGYIcBmyxk9-f0IQ5y-ci-JnzgcCPNJFxwgk6dJsZXjLwoiAHrYZluXIpPGg2up8pAQHU_DDTXCEnDZA5sa_AyQfDZjOTrQcfEuTqk-prvJG4jFKO_f9SMiZSaSyUJDjvGzLXDmxC3MLC5Q7dF90uBxLZjTtgkY45bgGemB-M7aF86VuYL6NjaU8lgf_selPJFz_zcXO4URnQDqRerDbQPOBAeEglg"/></div><div><div class="flex items-center gap-1"><h1 class="font-bold text-[14px] leading-tight text-[#2B231B] tracking-wide">ทองแท้ <span class="text-[#B3832B] font-semibold">96.5%</span></h1></div><p class="text-[10.5px] text-[#867664] font-medium leading-tight">By DEEGGOLD</p></div></div><div class="flex items-center gap-2"><div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-[#FCFAF4] border border-[#DFC894]/70 shadow-sm"><span class="w-3.5 h-3.5 rounded-full bg-[#528F4B] text-white flex items-center justify-center text-[9px] font-bold">✓</span><span class="text-[11px] text-[#4E4132] font-medium tracking-tight">ยืนยันเบอร์โทรแล้ว</span></div><button class="w-8.5 h-8.5 w-[34px] h-[34px] rounded-full bg-[#EFE4CF] border border-[#DAC18E] text-[#5C451D] text-xs font-semibold flex items-center justify-center shadow-sm active:scale-95 transition-transform" type="button">สม</button></div></header>
+<!-- END: MainHeader -->
+<!-- Scrollable Content Area -->
+<main class="flex-1 px-5 pt-4 safe-bottom"><section class="mb-3.5"><h1 class="text-2xl font-bold text-[#210e11] leading-tight">ออมทอง</h1><p class="text-sm text-[#7a6f68] font-normal mt-0.5">จัดการทองสะสมและแผนออมของคุณ</p></section><div class="mb-4.5 flex flex-col gap-3"><section class="relative rounded-2xl bg-gradient-to-b from-[#2a0d12] via-[#240a0e] to-[#1e090d] text-white p-4 border-2 border-[#D4AF37]/80 shadow-[0_6px_20px_rgba(42,13,18,0.35)] overflow-hidden"><div class="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-gold-400/10 blur-2xl pointer-events-none"></div><div class="flex justify-between items-center mb-1 relative z-10"><span class="text-xs text-[#EADCC8] font-medium">ทองสะสมทั้งหมด</span><div class="flex items-center gap-1 bg-[#4A161E]/80 border border-[#D4AF37]/40 px-2.5 py-0.5 rounded-full"><span class="text-[10px] text-[#F3E2A3] font-medium">ทองคำแท่ง 96.5%</span></div></div><div class="flex items-baseline gap-2 my-1.5 relative z-10"><span class="text-3xl font-extrabold text-white tracking-tight">0.0133</span><span class="text-sm font-semibold text-[#E9C349]">กรัม</span></div><div class="relative z-10 mb-3"><span class="text-xs text-[#D8C7A5] font-normal">มูลค่าโดยประมาณ <span class="font-semibold text-[#F3E2A3]">≈ ฿930.84 THB</span></span></div><div class="flex items-center justify-between pt-2.5 border-t border-[#D4AF37]/30 relative z-10"><a class="text-xs text-[#ECCB8F] hover:underline flex items-center font-medium gap-1" href="#"><span class="">ดูรายละเอียด</span><span class="">&gt;</span></a><button class="py-1.5 px-4 rounded-xl bg-gradient-to-r from-[#D7A73F] via-[#E9C368] to-[#C99831] text-[#2B1B04] font-bold text-xs shadow-[0_2px_8px_rgba(212,175,55,0.4)] hover:brightness-105 active:scale-95 transition flex items-center gap-1" type="button"><span class="text-sm leading-none">+</span><span class="">ออม</span></button></div></section><section class="rounded-2xl bg-[#FFFDF9] border border-[#DAC18E] p-3.5 shadow-[0_3px_12px_rgba(180,140,80,0.08)]"><div class="flex items-center justify-between mb-2"><div class="flex items-center gap-1.5"><div class="w-5 h-5 rounded-full bg-[#FFF2DA] text-[#A6751C] flex items-center justify-center"><svg class="w-3 h-3 fill-current" viewbox="0 0 24 24"><path d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z"></path></svg></div><h2 class="text-xs font-bold text-[#210e11]">โอนไปยังบัญชีทอง</h2></div><span class="text-[10px] text-[#867664] font-medium bg-[#FAF6EE] border border-[#E8DFC8] px-2 py-0.5 rounded-full">ข้อมูลแนะนำ</span></div><ul class="space-y-1.5 text-xs text-[#4E4132]"><li class="flex items-start gap-1.5 leading-snug"><span class="text-[#B3832B] font-bold text-xs shrink-0">*</span><span class="">เพื่อ <strong class="font-semibold text-[#210e11]">ถอน/ขาย</strong> หรือนัดรับทองคำจริง</span></li><li class="flex items-start gap-1.5 leading-snug"><span class="text-[#B3832B] font-bold text-xs shrink-0">*</span><span class="">รับทองจริง <strong class="font-semibold text-[#210e11]">ขั้นต่ำเพียง 0.06 กรัม</strong></span></li><li class="flex items-start gap-1.5 leading-snug"><span class="text-[#B3832B] font-bold text-xs shrink-0">*</span><span class="">ออมทองได้ทุกวัน <strong class="font-semibold text-[#210e11]">24 ชม.</strong> สะดวก ปลอดภัย</span></li></ul></section></div><section class="mb-4.5"><div class="flex justify-between items-center mb-2"><h2 class="text-base font-bold text-[#210e11]">แผนออมทอง</h2><a class="text-xs font-medium text-[#7a6f68] hover:text-[#210e11] transition flex items-center gap-0.5" href="#">ดูทั้งหมด &gt;</a></div><div class="bg-[#FFFDF9] rounded-2xl p-3.5 border border-[#E8DFC8] shadow-[0_3px_12px_rgba(180,140,80,0.08)]"><div class="flex justify-between items-center pb-2.5 mb-2.5 border-b border-[#F2ECE1]"><div class="flex items-center gap-1.5"><span class="text-[11px] font-semibold text-[#867664]">วันที่ 12/02/2567</span></div><span class="text-[10px] font-bold text-[#277D32] bg-[#EDF8EE] border border-[#277D32]/20 px-2 py-0.5 rounded-full">สถานะ : เบิกใช้งาน</span></div><div class="flex items-start gap-3 mb-3"><div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-[#B68427] via-[#F4DE94] to-[#A7761B] p-0.5 shadow-sm shrink-0 flex items-center justify-center"><img alt="ทองคำแท่ง" class="w-full h-full object-cover rounded-[10px]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDepAKfd0mat94R_aYJW2SpPOKH8LhQfolsw1z5x-b7-RQTMOyQpjHXDvjGQxY6kHknVrGSqTdhhMe8-INLF6XKETC-Mbio7FpG8EpYkXEIWcIOjWV48DSc4lnzM3VmrplSxTWISYtkBTWOcOE7SJdMM-7iEkCeO8oaVlICHost_I7w339zwlFFMtvWx1tyIU1b0ab3fPpQYhE-NOHDps7PWyaCxLD4DQj2Plz2QeKxrGR1dp2kLOnO"/></div><div class="flex-1 space-y-1"><div class="flex items-center justify-between"><span class="text-xs font-semibold text-[#210e11]">หมวด : รายเดือน</span><span class="text-xs text-[#8C7C69]">รายการรวม : <strong class="text-[#210e11] font-semibold">2</strong></span></div><div class="text-xs font-medium text-[#B3832B]">มูลค่าต่อครั้ง : <span class="font-bold text-[#2E2419]">400 THB</span></div></div></div><div class="grid grid-cols-2 gap-2 pt-2.5 border-t border-[#F2ECE1]"><button class="w-full py-2 px-3 rounded-xl border border-[#D4AF37]/60 bg-[#FAF6EE] text-[#5C451D] text-xs font-semibold hover:bg-[#F4ECE0] transition active:scale-[0.98]" type="button">ดูรายละเอียด</button><button class="w-full py-2 px-3 rounded-xl border border-[#D4AF37]/60 bg-[#FAF6EE] text-[#5C451D] text-xs font-semibold hover:bg-[#F4ECE0] transition active:scale-[0.98]" type="button">แก้ไขแผน</button></div></div><button class="mt-3 w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#D7A73F] via-[#E9C368] to-[#C99831] text-[#2B1B04] font-bold text-sm shadow-[0_4px_14px_rgba(212,175,55,0.35)] hover:brightness-105 active:scale-[0.99] transition flex items-center justify-center gap-1.5" type="button"><span class="text-base leading-none">+</span><span class="">สร้างแผนออมใหม่</span></button></section><section class="mb-4.5"><div class="flex justify-between items-center mb-2"><h2 class="text-base font-bold text-[#210e11]">รายการล่าสุด</h2><a class="text-xs font-medium text-[#7a6f68] hover:text-[#210e11] transition flex items-center gap-0.5" href="#">ดูทั้งหมด &gt;</a></div><div class="bg-white/95 rounded-2xl border border-[#E8DFC8] shadow-[0_3px_12px_rgba(180,140,80,0.08)] overflow-hidden divide-y divide-[#F4ECE0]"><div class="p-3 flex items-center justify-between gap-2"><div class="flex items-center gap-2.5"><div class="w-8 h-8 rounded-full bg-[#FFF2DA] text-[#A6751C] flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M4 14l3-6h10l3 6H4z"></path></svg></div><div><div class="text-xs font-bold text-[#2E2419] leading-tight">ออมทอง 96.5%</div><div class="text-[10px] text-[#8C7C69] mt-0.5">12 ก.พ. 2026 • 10:30 น.</div></div></div><div class="text-right flex flex-col items-end shrink-0"><span class="text-xs font-bold text-[#277D32] tracking-tight">+0.0124 กรัม</span><span class="text-[9px] text-[#267C31] mt-0.5 font-medium">สำเร็จ</span></div></div><div class="p-3 flex items-center justify-between gap-2"><div class="flex items-center gap-2.5"><div class="w-8 h-8 rounded-full bg-[#EDF8EE] text-[#2C9337] flex items-center justify-center shrink-0 text-sm font-bold">+</div><div><div class="text-xs font-bold text-[#2E2419] leading-tight">ฝากเงิน</div><div class="text-[10px] text-[#8C7C69] mt-0.5">11 ก.พ. 2026 • 14:15 น.</div></div></div><div class="text-right flex flex-col items-end shrink-0"><span class="text-xs font-bold text-[#277D32] tracking-tight">+฿1,000.00</span><span class="text-[9px] text-[#267C31] mt-0.5 font-medium">สำเร็จ</span></div></div><div class="p-3 flex items-center justify-between gap-2"><div class="flex items-center gap-2.5"><div class="w-8 h-8 rounded-full bg-[#FEEBED] text-[#D32F2F] flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div><div class="text-xs font-bold text-[#2E2419] leading-tight">ถอนเงิน</div><div class="text-[10px] text-[#8C7C69] mt-0.5">10 ก.พ. 2026 • 09:20 น.</div></div></div><div class="text-right flex flex-col items-end shrink-0"><span class="text-xs font-bold text-[#D32F2F] tracking-tight">-฿500.00</span><span class="text-[9px] text-[#267C31] mt-0.5 font-medium">สำเร็จ</span></div></div><div class="p-3 text-center bg-[#FAF6EE]/50"><a class="text-xs font-semibold text-[#881D26] hover:underline flex items-center justify-center gap-1" href="#history"><span class="">ดูประวัติรายการทั้งหมด</span><span class="text-[11px]">&gt;</span></a></div></div></section></main>
+<!-- BEGIN: BottomNavigationBar -->
+<!-- Fixed 5-tab menu matching Screen 10 -->
+<nav class="fixed bottom-0 max-w-[390px] w-full bg-[#FAF6EE]/95 backdrop-blur-md border-t border-gold-400/30 px-2 py-2 flex justify-around items-center z-30 shadow-lg"><a class="flex flex-col items-center gap-0.5 text-[#736555] hover:text-[#2C2318] transition" href="#home"><div class="w-6 h-6 flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 9.75L12 3l9 6.75V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.75z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9 21V12h6v9" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span class="text-[10px] font-medium tracking-tight">หน้าแรก</span><div class="w-3.5 h-0.5 bg-transparent mt-0.5"></div></a><a class="flex flex-col items-center gap-0.5 text-[#881D26] group" href="#savings"><div class="w-6 h-6 flex items-center justify-center"><svg class="w-5 h-5 text-[#881D26]" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span class="text-[10px] font-bold tracking-tight text-[#881D26]">ออมทอง</span><div class="w-3.5 h-0.5 bg-[#881D26] rounded-full mt-0.5"></div></a><a class="flex flex-col items-center gap-0.5 text-[#736555] hover:text-[#2C2318] transition" href="#redeem"><div class="w-6 h-6 flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span class="text-[10px] font-medium tracking-tight">ขอรับทอง</span><div class="w-3.5 h-0.5 bg-transparent mt-0.5"></div></a><a class="flex flex-col items-center gap-0.5 text-[#736555] hover:text-[#2C2318] transition" href="#history"><div class="w-6 h-6 flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span class="text-[10px] font-medium tracking-tight">ประวัติ</span><div class="w-3.5 h-0.5 bg-transparent mt-0.5"></div></a><a class="flex flex-col items-center gap-0.5 text-[#736555] hover:text-[#2C2318] transition" href="#profile"><div class="w-6 h-6 flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><rect height="6" rx="1" width="6" x="4" y="4"></rect><rect height="6" rx="1" width="6" x="14" y="4"></rect><rect height="6" rx="1" width="6" x="4" y="14"></rect><rect height="6" rx="1" width="6" x="14" y="14"></rect></svg></div><span class="text-[10px] font-medium tracking-tight">โปรไฟล์</span><div class="w-3.5 h-0.5 bg-transparent mt-0.5"></div></a></nav>
+<!-- END: BottomNavigationBar -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1b090c]/65 backdrop-blur-[2px]"><div class="w-full max-w-[350px] bg-[#FFFDF9] rounded-3xl p-5 sm:p-6 border border-[#DAC18E] shadow-[0_10px_30px_rgba(74,8,19,0.3)] relative text-stone-800"><div class="flex items-center justify-between pb-3.5 border-b border-[#F2ECE1] mb-4"><h2 class="text-xl font-bold text-[#210e11] tracking-wide">ออมทอง</h2><button class="w-8 h-8 rounded-full bg-[#FAF6EE] text-[#736555] hover:text-[#210e11] hover:bg-[#EFE4CF] transition flex items-center justify-center text-sm font-bold active:scale-95" type="button">✕</button></div><div class="flex flex-col items-center justify-center py-8 px-2"><div class="relative w-20 h-20 mb-6 flex items-center justify-center"><div class="w-20 h-20 rounded-full border-4 border-[#F2ECE1] border-t-[#D4AF37] border-r-[#E9C368] animate-spin shadow-sm"></div><div class="absolute inset-2 rounded-full bg-gradient-to-tr from-[#FAF6EE] to-[#FFFDF9] flex items-center justify-center shadow-inner"><svg class="w-7 h-7 text-[#B3832B] animate-pulse" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></div><h3 class="text-xl font-bold text-[#210e11] tracking-tight mb-2 text-center">กำลังดำเนินงาน</h3><p class="text-sm text-[#7a6f68] font-normal text-center">กรุณารอสักครู่</p></div></div></div></div>
+</body></html>

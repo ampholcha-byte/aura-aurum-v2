@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-ivory: #fff8f1;
+}
+
+html,
+body {
+  font-family: "Sarabun", "Plus Jakarta Sans", system-ui, sans-serif;
+  background-color: #fff8f1;
+  color: #2d2421;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Financial digits: tabular numbers ป้องกันตัวเลขสั่น (CLAUDE.md §2.2) */
+.tnum,
+.financial-digits {
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}

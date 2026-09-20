@@ -1,0 +1,44 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Button from "@/components/common/Button";
+import { formatTHB } from "@/utils/formatters";
+
+type Props = {
+  amount: number;
+  onPaid: () => void;
+  onClose: () => void;
+};
+
+/** SCREEN_22 — QR Payment ชำระค่าทอง (นับถอยหลัง 10:00) */
+export default function QrPayModal({ amount, onPaid, onClose }: Props) {
+  const [secs, setSecs] = useState(600);
+  useEffect(() => {
+    if (secs <= 0) return;
+    const t = setTimeout(() => setSecs((s) => s - 1), 1000);
+    return () => clearTimeout(t);
+  }, [secs]);
+  const mm = String(Math.floor(secs / 60)).padStart(2, "0");
+  const ss = String(secs % 60).padStart(2, "0");
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 backdrop-blur-sm">
+      <div className="w-full max-w-[430px] rounded-t-3xl bg-white p-5 pb-8 text-center">
+        <p className="text-base font-bold text-espresso">สแกน QR ชำระค่าทอง</p>
+        <div className="mx-auto mt-4 flex h-48 w-48 items-center justify-center rounded-2xl border-2 border-gold bg-[#FFFDF8]">
+          <p className="px-6 text-xs text-secondary">Thai QR Code<br />Biller ID · Ref</p>
+        </div>
+        <p className="financial-digits mt-3 text-xl font-extrabold text-espresso">
+          {formatTHB(amount)} THB
+        </p>
+        <p className="financial-digits mt-1 text-sm font-bold text-aus-red">
+          {mm}:{ss} นาที
+        </p>
+        <div className="mt-4 grid grid-cols-2 gap-2">
+          <Button variant="champagne" onClick={onClose}>บันทึก QR Code</Button>
+          <Button onClick={onPaid}>ชำระเสร็จแล้ว</Button>
+        </div>
+      </div>
+    </div>
+  );
+}

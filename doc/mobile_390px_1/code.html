@@ -1,0 +1,541 @@
+<!DOCTYPE html><html lang="th" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Thai Gold Savings - DEEGGOLD</title>
+<!-- Google Fonts: Prompt & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Prompt', 'Plus Jakarta Sans', 'sans-serif'],
+            number: ['Plus Jakarta Sans', 'Prompt', 'sans-serif'],
+          },
+          colors: {
+            gold: {
+              50: '#FAF6EE',
+              100: '#F5ECCE',
+              200: '#EBD99D',
+              300: '#DFC26D',
+              400: '#D4AF37',
+              500: '#B8860B',
+              600: '#996515',
+              700: '#754B0B',
+              800: '#523307',
+            },
+            burgundy: {
+              800: '#5A0B13',
+              900: '#3D060C',
+              950: '#270307',
+            },
+            cream: {
+              50: '#FFFDF9',
+              100: '#FAF7F0',
+              200: '#F3EDE2',
+              300: '#EADFCF',
+            }
+          },
+          boxShadow: {
+            'gold-sm': '0 2px 8px rgba(184, 134, 11, 0.08), 0 1px 2px rgba(0,0,0,0.03)',
+            'gold-md': '0 4px 18px rgba(212, 175, 55, 0.16), 0 2px 6px rgba(0,0,0,0.04)',
+            'card-luxury': '0 8px 24px -4px rgba(184, 134, 11, 0.12), 0 2px 6px rgba(0,0,0,0.04)',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-decorations">
+    body {
+      background-color: #F8F4EB;
+      font-family: 'Prompt', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Subtle luxury silk aura effect */
+    .bg-silk-aura {
+      background-color: #F7F3E9;
+      background-image: 
+        radial-gradient(circle at 10% 8%, rgba(245, 230, 190, 0.85) 0%, transparent 45%),
+        radial-gradient(circle at 90% 18%, rgba(230, 195, 125, 0.45) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(255, 252, 245, 0.9) 0%, transparent 60%),
+        radial-gradient(circle at 85% 75%, rgba(240, 215, 160, 0.4) 0%, transparent 50%),
+        linear-gradient(180deg, #FBF8F1 0%, #F5EEDD 100%);
+    }
+
+    /* Metallic Gold Gradients */
+    .bg-gradient-gold-btn {
+      background: linear-gradient(135deg, #B58838 0%, #9E7428 100%);
+    }
+    .bg-gradient-gold-btn:active {
+      background: linear-gradient(135deg, #9E7428 0%, #87611F 100%);
+    }
+    
+    /* Ingot 3D CSS Miniature Illusion */
+    .gold-bar-mini {
+      background: linear-gradient(135deg, #F6E294 0%, #DFB443 35%, #B48422 70%, #E9CE79 100%);
+      box-shadow: 2px 4px 10px rgba(140, 95, 16, 0.35), inset 1px 1px 2px rgba(255, 255, 255, 0.8), inset -1px -1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Hide scrollbars */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="flex justify-center min-h-screen" style="font-family: Sarabun, sans-serif;">
+<!-- Mobile Viewport Canvas: 390px fixed frame standard for iOS -->
+<div class="w-full max-w-[390px] min-h-screen bg-silk-aura relative pb-28 text-[#2E2820] flex flex-col shadow-2xl overflow-x-hidden" style="font-family: Sarabun, sans-serif;">
+<!-- BEGIN: TopStatusBar (iOS standard simulated) -->
+<div class="pt-3 px-7 pb-1 flex justify-between items-center text-xs font-semibold tracking-tight text-neutral-800" data-purpose="status-bar">
+<span class="">09:41</span>
+<div class="flex items-center space-x-1.5">
+<!-- Cellular Signal Icon -->
+<svg class="w-4 h-3 text-neutral-800" fill="currentColor" viewBox="0 0 16 12">
+<rect height="4" rx="0.5" width="2" x="0.5" y="8"></rect>
+<rect height="6.5" rx="0.5" width="2" x="4.5" y="5.5"></rect>
+<rect height="9" rx="0.5" width="2" x="8.5" y="3"></rect>
+<rect height="11.5" rx="0.5" width="2" x="12.5" y="0.5"></rect>
+</svg>
+<!-- Wifi Icon -->
+<svg class="w-3.5 h-3 text-neutral-800" fill="currentColor" viewBox="0 0 16 12">
+<path d="M8 2.5a11.25 11.25 0 017.3 2.7.75.75 0 01-.02 1.07l-1.4 1.34a.75.75 0 01-1.02-.02A8.25 8.25 0 008 5.75a8.25 8.25 0 00-4.86 1.84.75.75 0 01-1.02.02l-1.4-1.34A.75.75 0 01.7 5.2 11.25 11.25 0 018 2.5zm0 4.25a6.5 6.5 0 014.15 1.5.75.75 0 01-.02 1.07l-1.37 1.3a.75.75 0 01-1.02-.02A3.5 3.5 0 008 9.5a3.5 3.5 0 00-1.76.48.75.75 0 01-1.02.02L3.85 8.7a.75.75 0 01-.02-1.07A6.5 6.5 0 018 6.75zm0 4a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5z"></path>
+</svg>
+<!-- Battery Icon -->
+<div class="w-5 h-2.5 border border-neutral-800 rounded-[3px] p-[1px] flex items-center">
+<div class="h-full w-3.5 bg-neutral-800 rounded-[1.5px]"></div>
+</div>
+</div>
+</div>
+<!-- END: TopStatusBar -->
+<!-- BEGIN: HeaderSection -->
+<header class="px-4 pt-2.5 pb-3 flex items-center justify-between" data-purpose="app-header">
+<div class="flex items-center gap-2.5">
+<!-- Brand Medallion Logo -->
+<div class="relative w-11 h-11 rounded-full p-[1.5px] bg-gradient-to-tr from-[#B68427] via-[#F4DE94] to-[#A7761B] shadow-md flex-shrink-0">
+<img alt="DEEGGOLD Logo" class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWbkZ4naieEWlNG8tHMAE2oTTrJbuWTvZ3p9U-mE61VRcKFp2lh5h1FInE_Z7Nri_gLIy-X00n-jhBchxDsMhmKMAdMFszRzkVhAIbiP2BX-IFFLyH7ehTkavDKWB44A9pCC2k7ULt6Xdqgf9YkW31OMdOMv2PA1nkwAMrx3g7yUprnk0-1q3qlWM8XmLDYQfeh9HmWQuwwnuAuXFigmFU51GU5c_pDMy3OQGIUramzfsB6tvRtCOPXKbI6Zo-8PVQwg">
+</div>
+<!-- Title & Subtitle -->
+<div>
+<div class="flex items-center gap-1">
+<h1 class="font-bold text-[15px] leading-tight text-[#2B231B] tracking-wide">ทองแท้ <span class="text-[#B3832B] font-semibold">96.5%</span></h1>
+</div>
+<p class="text-[11px] text-[#867664] font-medium leading-tight">By DEEGGOLD</p>
+</div>
+</div>
+<!-- Action badges / profile button -->
+<div class="flex items-center gap-2">
+<!-- Verified Phone Status Badge (Constraint: ยืนยันเบอร์โทรแล้ว) -->
+<div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-[#FCFAF4] border border-[#DFC894]/70 shadow-sm">
+<span class="w-3.5 h-3.5 rounded-full bg-[#528F4B] text-white flex items-center justify-center text-[9px] font-bold">✓</span>
+<span class="text-[11.5px] text-[#4E4132] font-medium tracking-tight">ยืนยันเบอร์โทรแล้ว</span>
+</div>
+<!-- Thai User Profile Initials Pill -->
+<button class="w-9 h-9 rounded-full bg-[#EFE4CF] border border-[#DAC18E] text-[#5C451D] text-xs font-semibold flex items-center justify-center shadow-sm active:scale-95 transition-transform" data-purpose="profile-button" type="button">
+          สม
+        </button>
+</div>
+</header>
+<!-- END: HeaderSection -->
+<main class="px-3.5 flex flex-col gap-3.5 mt-0.5">
+<!-- BEGIN: GoldPriceSection -->
+<section class="relative rounded-2xl bg-gradient-to-b from-[#FFFDF9] via-[#FAF5EA] to-[#F6EDE0] p-3.5 border-2 border-[#D4AF37]/80 shadow-[0_4px_16px_rgba(212,175,55,0.22)] overflow-hidden" data-purpose="gold-price-section">
+<!-- Section Header Row -->
+<div class="flex justify-between items-start mb-2.5">
+<div>
+<div class="flex items-center gap-1">
+<span class="text-[#B3832B] text-xs font-bold">→</span>
+<h2 class="text-sm font-bold text-[#2A2318] tracking-tight">ราคาทองคำแท่ง 96.5%</h2>
+</div>
+<p class="text-[10px] text-[#7A6D5E] pl-3.5">สมาคมค้าทองคำแห่งประเทศไทย</p>
+</div>
+<!-- Open 24 Hours Tag -->
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#EBF5EA] border border-[#BDE3B9] flex-shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-[#2E993B] animate-pulse flex-shrink-0"></span>
+<span class="text-[10px] font-medium text-[#267C31] flex-shrink-0">เปิด 24 ชม.</span>
+</div>
+</div>
+<!-- Price Cards & 3D Gold Bar Graphic Layout -->
+<div class="grid grid-cols-12 gap-2 relative z-0">
+<!-- Buy Price (ราคารับซื้อ) -->
+<div class="col-span-5 bg-[#FFFFFF]/90 rounded-xl p-2 border border-[#E9DAC0] shadow-[0_2px_5px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-center text-[10px] text-[#6A5E50] mb-0.5">
+<span class="">ราคารับซื้อ (บาท)</span>
+<span class="text-[#D32F2F] font-semibold text-[9.5px]">▲ +50</span>
+</div>
+<div class="text-[#9E1424] font-number font-bold text-[17px] tracking-tight leading-tight">
+                ฿48,750
+              </div>
+</div>
+<div class="text-[9px] text-[#938779] mt-1 pt-1 border-t border-[#F2ECE1]">
+              ต่อน้ำหนัก 15.244 กรัม
+            </div>
+</div>
+<!-- Sell Price (ราคาขายออก) -->
+<div class="col-span-5 bg-[#FFFFFF]/90 rounded-xl p-2 border border-[#E9DAC0] shadow-[0_2px_5px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-center text-[10px] text-[#6A5E50] mb-0.5">
+<span class="">ราคาขายออก (บาท)</span>
+<span class="text-[#D32F2F] font-semibold text-[9.5px]">▲ +50</span>
+</div>
+<div class="text-[#2D2418] font-number font-bold text-[17px] tracking-tight leading-tight">
+                ฿49,650
+              </div>
+</div>
+<div class="text-[8.5px] text-[#938779] mt-1 pt-1 border-t border-[#F2ECE1] truncate">
+              อัปเดต 14:32 น. (ครั้งที่ 3)
+            </div>
+</div>
+<!-- Gold Bar Visual Right Column -->
+<div class="col-span-2 flex flex-col items-center justify-center relative">
+<!-- Simulated Realistic 3D Ingot -->
+<div class="w-11 h-14 rounded gold-bar-mini flex flex-col items-center justify-between p-1 rotate-6 border border-[#FFF4B8]/60 shadow-md">
+<span class="text-[6px] font-bold text-[#6D490E] tracking-widest leading-none mt-0.5">DEEGGOLD</span>
+<div class="w-3.5 h-3.5 border border-[#855B14]/40 rounded-full flex items-center justify-center text-[7px] text-[#553807] font-bold">D</div>
+<span class="text-[5.5px] font-semibold text-[#6D490E] leading-none mb-0.5">96.5%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: GoldPriceSection -->
+<!-- BEGIN: TotalAssetsCard -->
+<section class="rounded-2xl relative overflow-hidden bg-gradient-to-br from-[#500810] via-[#350409] to-[#200205] p-4 text-white border-2 border-[#D4AF37] shadow-[0_4px_20px_rgba(212,175,55,0.30)]" data-purpose="total-assets-card">
+<!-- Background Gold Candlestick Graphic Watermark -->
+
+<!-- Card Top Bar -->
+<div class="flex justify-between items-center mb-1 relative z-10">
+<div class="flex items-center gap-1.5">
+<span class="text-xs text-[#EADFCF] font-normal">มูลค่าสินทรัพย์รวม (Total Assets)</span>
+<!-- Eye toggle icon -->
+<svg class="w-3.5 h-3.5 text-[#E0CEAC] opacity-90 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<!-- Currency Selector Pill -->
+<span class="text-[11px] text-[#ECCB8F]/80 font-normal tracking-tight">หน่วย: บาท (THB)</span>
+</div>
+<!-- Big Balance Number -->
+<div class="relative z-10 mt-1 mb-2.5">
+<div class="text-[26px] font-extrabold font-number tracking-tight text-[#FFF8E6] flex items-baseline gap-1.5">
+            10,030.02 <span class="text-sm font-semibold tracking-normal text-[#E8CCA0]">THB</span>
+</div>
+</div>
+<!-- Bottom details: Gain Pill & Allocation link -->
+<div class="flex justify-between items-center relative z-10 pt-1">
+<!-- Profit Pill -->
+<div class="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#000000]/30 border border-[#E9C775]/35 text-[11px] font-medium text-[#78E08F]">
+<span class="">↗</span>
+<span class="font-number">+30.02 THB (+0.30%)</span>
+</div>
+<!-- Ratio Link -->
+<div class="flex items-center text-[11px] text-[#ECCB8F] hover:underline cursor-pointer"><span class="">ดูรายละเอียด</span><svg class="w-3 h-3 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div>
+</div>
+</section>
+<!-- END: TotalAssetsCard -->
+<!-- BEGIN: QuickActionsGrid (4 circular buttons) -->
+<section class="grid grid-cols-4 gap-2" data-purpose="quick-actions"><!-- Action 1: Deposit -->
+<div class="bg-gradient-to-b from-[#FFFFFF] to-[#FDFBF7] rounded-xl p-2.5 py-3 flex flex-col items-center text-center border-1.5 border-[#D4AF37]/70 shadow-[0_2px_10px_rgba(212,175,55,0.15)] cursor-pointer hover:shadow transition-shadow justify-between gap-1.5">
+<div class="w-9 h-9 rounded-full bg-gradient-to-b from-[#7A0D18] to-[#45050C] flex items-center justify-center text-[#FEE6A8] shadow-inner flex-shrink-0">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+<path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div class="flex flex-col items-center justify-center mt-0.5">
+<span class="font-bold text-[11px] text-[#2D2319] leading-tight">ฝากเงิน</span>
+<span class="text-[9px] text-[#7C6E5C] leading-tight mt-1">Cash Wallet</span>
+</div>
+</div>
+<!-- Action 2: Withdraw -->
+<div class="bg-gradient-to-b from-[#FFFFFF] to-[#FDFBF7] rounded-xl p-2.5 py-3 flex flex-col items-center text-center border-1.5 border-[#D4AF37]/70 shadow-[0_2px_10px_rgba(212,175,55,0.15)] cursor-pointer hover:shadow transition-shadow justify-between gap-1.5">
+<div class="w-9 h-9 rounded-full bg-gradient-to-b from-[#CFA145] to-[#A07421] flex items-center justify-center text-white shadow-inner flex-shrink-0">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+<path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div class="flex flex-col items-center justify-center mt-0.5">
+<span class="font-bold text-[11px] text-[#2D2319] leading-tight">ถอนเงิน</span>
+<span class="text-[8.5px] text-[#7C6E5C] leading-tight mt-1">เข้าบัญชีธนาคาร</span>
+</div>
+</div>
+<!-- Action 3: Request Gold Delivery -->
+<div class="bg-gradient-to-b from-[#FFFFFF] to-[#FDFBF7] rounded-xl p-2.5 py-3 flex flex-col items-center text-center border-1.5 border-[#D4AF37]/70 shadow-[0_2px_10px_rgba(212,175,55,0.15)] cursor-pointer hover:shadow transition-shadow justify-between gap-1.5">
+<div class="w-9 h-9 rounded-full bg-gradient-to-b from-[#6A0C16] to-[#390309] flex items-center justify-center text-[#F9DE96] shadow-inner flex-shrink-0">
+<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+<path d="M4 14l3-6h10l3 6H4zm1.5 2h13a1 1 0 011 1v1H4.5v-1a1 1 0 011-1z"></path>
+</svg>
+</div>
+<div class="flex flex-col items-center justify-center mt-0.5">
+<span class="font-bold text-[11px] text-[#2D2319] leading-tight">ขอรับทอง</span>
+<span class="text-[9px] text-[#7C6E5C] leading-tight mt-1">ส่งบ้าน/รับสาขา</span>
+</div>
+</div>
+<!-- Action 4: History -->
+<div class="bg-gradient-to-b from-[#FFFFFF] to-[#FDFBF7] rounded-xl p-2.5 py-3 flex flex-col items-center text-center border-1.5 border-[#D4AF37]/70 shadow-[0_2px_10px_rgba(212,175,55,0.15)] cursor-pointer hover:shadow transition-shadow justify-between gap-1.5">
+<div class="w-9 h-9 rounded-full bg-gradient-to-b from-[#EFE5D2] to-[#DFC8A4] flex items-center justify-center text-[#6A4D1B] shadow-inner border border-[#CDAF82]/40 flex-shrink-0">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+<path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div class="flex flex-col items-center justify-center mt-0.5">
+<span class="font-bold text-[11px] text-[#2D2319] leading-tight">ประวัติ</span>
+<span class="text-[9px] text-[#7C6E5C] leading-tight mt-1">บัญชี &amp; ออม</span>
+</div>
+</div></section>
+<!-- END: QuickActionsGrid -->
+<!-- BEGIN: CashWalletCard -->
+<section class="rounded-2xl bg-gradient-to-b from-[#FFFFFF] to-[#FBF8F1] p-3.5 border-2 border-[#D4AF37]/75 shadow-[0_4px_16px_rgba(212,175,55,0.20)]" data-purpose="cash-wallet-card">
+<!-- Top row -->
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-full bg-[#FFF3DC] border border-[#ECD19A] flex items-center justify-center text-[#B08027] shadow-sm">
+<!-- Wallet Icon -->
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+<path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div>
+<h3 class="text-xs font-bold text-[#2A2219]">บัญชีเงินสด (Cash Wallet)</h3>
+<p class="text-[10px] text-[#7E7060]">สำหรับจัดเก็บเงินสดของคุณ</p>
+</div>
+</div>
+<!-- Status pill -->
+<span class="px-2 py-0.5 rounded-md bg-[#EBF6EC] text-[#277D32] text-[10px] font-medium border border-[#C6E6C4]">พร้อมใช้งาน</span>
+</div>
+<!-- Available Balance -->
+<div class="pl-1 mb-3">
+<div class="text-[10px] text-[#7A6C5C]">ยอดเงินที่ใช้ได้</div>
+<div class="text-[20px] font-extrabold font-number text-[#2D2318] tracking-tight">
+            ฿30,145.45 <span class="text-xs font-semibold text-[#8C7A65]">THB</span>
+</div>
+</div>
+<!-- Card Buttons -->
+<div class="grid grid-cols-2 gap-2">
+<button class="py-2 px-3 rounded-lg bg-gradient-gold-btn text-white text-xs font-semibold shadow flex items-center justify-center gap-1 active:scale-[0.98] transition" type="button">
+<span class="">+</span>
+<span class="">ฝากเงิน</span>
+</button>
+<button class="py-2 px-3 rounded-lg bg-[#FAF5EC] border border-[#DAC08D] text-[#5A4522] text-xs font-semibold flex items-center justify-center active:scale-[0.98] transition" type="button">
+            ถอนเงิน
+          </button>
+</div>
+</section>
+<!-- END: CashWalletCard -->
+<!-- BEGIN: GoldWalletCard -->
+<section class="rounded-2xl bg-gradient-to-b from-[#FFFFFF] to-[#FBF8F1] p-3.5 border-2 border-[#D4AF37]/75 shadow-[0_4px_16px_rgba(212,175,55,0.20)]" data-purpose="gold-wallet-card">
+<!-- Top row -->
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-full bg-[#FFF0D4] border border-[#ECD19A] flex items-center justify-center text-[#B08027] shadow-sm">
+<!-- Ingot / Stack Icon -->
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+<path d="M7 6h10l2 4H5l2-4zm-4 7h8l-1.5 4H2.5L3 13zm10 0h8l.5 4h-7l-1.5-4z"></path>
+</svg>
+</div>
+<div>
+<h3 class="text-xs font-bold text-[#2A2219]">บัญชีทองคำ (Gold Wallet)</h3>
+<p class="text-[10px] text-[#7E7060]">สะสมทองคำแท่ง 96.5%</p>
+</div>
+</div>
+<!-- Badge -->
+<span class="px-2 py-0.5 rounded-md bg-[#FFF7E8] text-[#976D1F] text-[10px] font-semibold border border-[#E9CCA1]">ทองแท้ 96.5%</span>
+</div>
+<!-- Balance row: Gold Grams & Estimated THB -->
+<div class="flex justify-between items-end pl-1 mb-3">
+<div>
+<div class="text-[10px] text-[#7A6C5C]">น้ำหนักทองคำสะสมในระบบ</div>
+<div class="text-[20px] font-extrabold font-number text-[#2D2318] tracking-tight">
+              0.0133 <span class="text-xs font-medium text-[#7D6B57]">กรัม</span>
+</div>
+</div>
+<div class="text-right">
+<div class="text-[9.5px] text-[#867563]">มูลค่าโดยประมาณ</div>
+<div class="text-[13px] font-bold font-number text-[#277D32]">
+              ≈ ฿930.84 <span class="text-[10px]">THB</span>
+</div>
+</div>
+</div>
+<!-- Action buttons -->
+<div class="grid grid-cols-2 gap-2">
+<button class="py-2 px-3 rounded-lg bg-gradient-gold-btn text-white text-xs font-semibold shadow flex items-center justify-center gap-1.5 active:scale-[0.98] transition" type="button"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M4 14l3-6h10l3 6H4z"></path></svg><span class="">ขอรับทอง</span></button>
+<button class="py-2 px-3 rounded-lg bg-[#FAF5EC] border border-[#DAC08D] text-[#5A4522] text-xs font-semibold flex items-center justify-center active:scale-[0.98] transition" type="button">
+            ประวัติการออม
+          </button>
+</div>
+</section>
+<!-- END: GoldWalletCard -->
+<!-- BEGIN: GoldRedemptionInformationCard -->
+<section class="rounded-xl bg-gradient-to-r from-[#FFFBF2] via-[#FDF8EE] to-[#F5EAD6] p-3 border-1.5 border-[#D4AF37]/80 shadow-[0_4px_16px_rgba(212,175,55,0.18)] flex items-center justify-between gap-2.5" data-purpose="gold-redemption-info">
+<div class="flex items-start gap-2.5">
+<!-- Gold Shield Icon -->
+<div class="w-8 h-8 rounded-full bg-[#FCF3DE] border border-[#DFC58F] flex items-center justify-center text-[#B08027] flex-shrink-0 mt-0.5">
+<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.244 4.66-1.574 8-6.019 8-11.244 0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" fill-rule="evenodd"></path>
+</svg>
+</div>
+<!-- Description Text -->
+<div>
+<div class="flex items-center gap-1 font-bold text-[11px] text-[#332A1D]">
+<span class="">เชื่อมั่นทุกการรับทองคำแท่ง</span>
+<span class="text-[#B3832B] text-[10px]">›</span>
+</div>
+<p class="text-[9.5px] text-[#695B4B] leading-snug mt-0.5">
+              แลกรับได้เมื่อสะสมครบ 0.06 กรัม ขึ้นไป หรือบันทึก 1 ครั้งขึ้นไป จัดส่งด้วยระบบขนส่งพิเศษคุ้มครอง ประกันภัย 100% ถึงบ้าน หรือเลือกรับได้ที่ Bangkok Golds ทั่วประเทศ
+            </p>
+</div>
+</div>
+<!-- Realistic Ingot Badge Accent -->
+<div class="w-7 h-10 gold-bar-mini rounded flex-shrink-0 rotate-12 flex flex-col items-center justify-center p-0.5 border border-[#FFF9DB]">
+<span class="text-[5px] font-bold text-[#6D490E]">DEEG</span>
+<span class="text-[4px] font-semibold text-[#6D490E]">96.5%</span>
+</div>
+</section>
+<!-- END: GoldRedemptionInformationCard -->
+<!-- BEGIN: RecentActivitySection -->
+<section class="rounded-2xl bg-[#FFFFFF] p-3.5 border-2 border-[#D4AF37]/65 shadow-[0_4px_16px_rgba(212,175,55,0.16)] mb-4" data-purpose="recent-activity-section">
+<!-- Header -->
+<div class="flex justify-between items-start mb-2.5 pb-2 border-b border-[#F5EFE4]">
+<div>
+<h3 class="font-bold text-xs text-[#2D2319]">รายการล่าสุด (Recent Activity)</h3>
+<p class="text-[10px] text-[#7C6E5C]">ประวัติการฝาก ถอน และซื้อขายทองคำของคุณ</p>
+</div>
+<a class="text-[11px] font-medium text-[#A37424] flex items-center hover:underline" href="#history">
+            ดูทั้งหมด <span class="ml-0.5 text-[9px]">›</span>
+</a>
+</div>
+<!-- 3 Transactions List -->
+<div class="flex flex-col divide-y divide-[#F6EFE4]"><!-- Transaction 1: Deposit -->
+<div class="py-2.5 flex items-center justify-between gap-2">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full bg-[#EDF8EE] text-[#2C9337] flex items-center justify-center flex-shrink-0 text-sm font-bold">
+                +
+              </div>
+<div>
+<div class="text-[11px] font-bold text-[#2E2419] leading-tight">ฝากเงินด้วย พร้อมเพย์ QR</div>
+<div class="text-[9px] text-[#8C7C69] mt-0.5">12 ก.พ. 2026 · 14:15 น. · เข้า Cash Wallet</div>
+<div class="text-[8.5px] text-[#8C7C69]">รหัส: DEP-00125</div>
+</div>
+</div>
+<div class="text-right flex flex-col items-end flex-shrink-0">
+<div class="font-number font-bold text-[12px] text-[#277D32] leading-tight">+฿1,000.00</div>
+<span class="text-[8.5px] text-[#267C31] mt-0.5 font-medium">สำเร็จ</span>
+</div>
+</div>
+<!-- Transaction 2: Gold Accumulation -->
+<div class="py-2.5 flex items-center justify-between gap-2">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full bg-[#FFF2DA] text-[#A6751C] flex items-center justify-center flex-shrink-0">
+<svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+<path d="M4 14l3-6h10l3 6H4z"></path>
+</svg>
+</div>
+<div>
+<div class="text-[11px] font-bold text-[#2E2419] leading-tight">ออมทอง 96.5%</div>
+<div class="text-[9px] text-[#8C7C69] mt-0.5">11 ก.พ. 2026 · 10:30 น. · ตัดเงินสด ฿1,000</div>
+<div class="text-[8.5px] text-[#8C7C69]">รหัส: SAV-00124</div>
+</div>
+</div>
+<div class="text-right flex flex-col items-end flex-shrink-0">
+<div class="font-number font-bold text-[12px] text-[#B08027] leading-tight">+0.0124 กรัม</div>
+<span class="text-[8.5px] text-[#267C31] mt-0.5 font-medium">สำเร็จ</span>
+</div>
+</div>
+<!-- Transaction 3: Withdrawal -->
+<div class="py-2.5 flex items-center justify-between gap-2">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full bg-[#FEEBED] text-[#D32F2F] flex items-center justify-center flex-shrink-0">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+<path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div>
+<div class="text-[11px] font-bold text-[#2E2419] leading-tight">ถอนเงินเข้า กสิกรไทย (x1234)</div>
+<div class="text-[9px] text-[#8C7C69] mt-0.5">10 ก.พ. 2026 · 09:20 น. · โอนเข้าธนาคาร</div>
+<div class="text-[8.5px] text-[#8C7C69]">รหัส: WTH-00123</div>
+</div>
+</div>
+<div class="text-right flex flex-col items-end flex-shrink-0">
+<div class="font-number font-bold text-[12px] text-[#D32F2F] leading-tight">-฿500.00</div>
+<span class="text-[8.5px] text-[#267C31] mt-0.5 font-medium">สำเร็จ</span>
+</div>
+</div></div>
+</section>
+<!-- END: RecentActivitySection -->
+</main>
+<!-- BEGIN: BottomNavigationBar (Fixed 5 tabs for iOS) -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[390px] bg-[#FAF6EE]/95 backdrop-blur-md border-t border-[#E3D1A8] py-2 px-3 z-50 flex justify-around items-center shadow-lg" data-purpose="bottom-navigation">
+<!-- Tab 1: หน้าแรก (Active) -->
+<a class="flex flex-col items-center gap-0.5 text-[#881D26] group" href="#home">
+<div class="w-6 h-6 flex items-center justify-center">
+<!-- Solid Home Icon -->
+<svg class="w-5 h-5 text-[#881D26]" fill="currentColor" viewBox="0 0 20 20">
+<path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+</svg>
+</div>
+<span class="text-[10px] font-bold tracking-tight">หน้าแรก</span>
+<div class="w-3.5 h-0.5 bg-[#881D26] rounded-full mt-0.5"></div>
+</a>
+<!-- Tab 2: ออมทอง -->
+<a class="flex flex-col items-center gap-0.5 text-[#736555] hover:text-[#2C2318] transition" href="#savings">
+<div class="w-6 h-6 flex items-center justify-center">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+<path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<span class="text-[10px] font-medium tracking-tight">ออมทอง</span>
+<div class="w-3.5 h-0.5 bg-transparent mt-0.5"></div>
+</a>
+<!-- Tab 3: ขอรับทอง -->
+<a class="flex flex-col items-center gap-0.5 text-[#736555] hover:text-[#2C2318] transition" href="#redeem">
+<div class="w-6 h-6 flex items-center justify-center">
+<!-- Gold Ingot Outline -->
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+<path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<span class="text-[10px] font-medium tracking-tight">ขอรับทอง</span>
+<div class="w-3.5 h-0.5 bg-transparent mt-0.5"></div>
+</a>
+<!-- Tab 4: ประวัติ -->
+<a class="flex flex-col items-center gap-0.5 text-[#736555] hover:text-[#2C2318] transition" href="#history">
+<div class="w-6 h-6 flex items-center justify-center">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+<path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<span class="text-[10px] font-medium tracking-tight">ประวัติ</span>
+<div class="w-3.5 h-0.5 bg-transparent mt-0.5"></div>
+</a>
+<!-- Tab 5: โปรไฟล์ -->
+<a class="flex flex-col items-center gap-0.5 text-[#736555] hover:text-[#2C2318] transition" href="#profile">
+<div class="w-6 h-6 flex items-center justify-center">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+<rect height="6" rx="1" width="6" x="4" y="4"></rect>
+<rect height="6" rx="1" width="6" x="14" y="4"></rect>
+<rect height="6" rx="1" width="6" x="4" y="14"></rect>
+<rect height="6" rx="1" width="6" x="14" y="14"></rect>
+</svg>
+</div>
+<span class="text-[10px] font-medium tracking-tight">โปรไฟล์</span>
+<div class="w-3.5 h-0.5 bg-transparent mt-0.5"></div>
+</a>
+</nav>
+<!-- END: BottomNavigationBar -->
+<!-- iOS Home Indicator Pill -->
+<div class="fixed bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-black/20 rounded-full z-50 pointer-events-none"></div>
+</div>
+
+
+
+
+</body></html>

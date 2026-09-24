@@ -64,6 +64,10 @@ Shell ทุกหน้า (ยกเว้นหน้า success/QR ที่
 - ใบเสร็จฝากเงินเดิม hardcode "QR Payment" → ส่ง query `channel` (qr/truemoney/ats) มาแสดงช่องทางจริง
 - rename `claude.md.md` → `claude.md` (เนื้อหาเดิม 100%) + แก้ reference ในเอกสาร + เพิ่ม ignore ไฟล์ขยะ (`dev-server.log`, `*.tsbuildinfo`, `.freebuff/`)
 
+**รอบ UI/iPad 24 ก.ย. 2569 (commits `c132907` ต่อ):**
+- **รองรับ iPad:** `MobileAppFrame` มือถือ 430px / จอ ≥768px (`md:`) ขยาย 700px กึ่งกลางจอ — ย้าย inline `maxWidth` ออกเป็น Tailwind class เพื่อให้ responsive ทำงาน · Home: การ์ด Cash/Gold Wallet จับคู่ 2 คอลัมน์บน iPad (`md:grid-cols-2`) หน้าอื่นยังคอลัมน์เดียว (กรอบขยายให้แล้ว)
+- **Visual Hierarchy การ์ด Wallet (Home):** ตัวเลขยอดเงินเป็น hero (text-2xl extrabold, หน่วย THB/กรัม ตัวเล็กสีเทา) · padding การ์ด p-5 · **สีปุ่มเหมือนเดิมตาม feedback** (ปุ่มหลัก = ทองไล่เฉดตัวขาว, ปุ่มรอง = ครีมขอบทอง 1.5px)
+
 **เหลือ (ยังไม่ทำ):** ต่อ API/ราคาทองเรียลไทม์ + auth จริง · QR code จริง + บันทึกสลิป/บันทึก QR (ตอนนี้เป็นปุ่ม UI + hint) · เชื่อม Address Book ของ profile เข้ากับฟอร์ม redeem (ตอนนี้ redeem มีที่อยู่+เบอร์โทรของตัวเอง — ฟิลด์ตรงกัน พร้อมผูก) · ระบบ PIN บังคับใช้ตอนยืนยันรายการ · ค่าจัดส่ง 35฿ เป็น mock คงที่ ควรคิดตามมูลค่าทอง · Hero Card หน้าแรกควรซ่อน "+0.30%" เมื่อมูลค่าทองเป็นศูนย์ · test/QA จริงจัง (responsive, edge cases)
 
 ## 7. Gotchas (อ่านก่อนแก้โค้ด)

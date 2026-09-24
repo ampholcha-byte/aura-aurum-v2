@@ -93,47 +93,47 @@ export default function Home() {
 
         {/* Dual Wallet */}
         <div className="grid gap-4 md:grid-cols-2">
-        <GoldCard className="p-4">
-          <div className="flex items-center justify-between">
-            <p className="text-sm font-bold text-espresso">Cash Wallet</p>
-            <span className="financial-digits text-base font-bold text-espresso">
-              ฿{formatTHB(cashBalance)} THB
-            </span>
-          </div>
-          <div className="mt-3 grid grid-cols-2 gap-2">
+        <GoldCard className="p-5">
+          <p className="text-xs font-semibold text-secondary">Cash Wallet</p>
+          <p className="financial-digits mt-1.5 text-2xl font-extrabold leading-tight text-espresso">
+            ฿{formatTHB(cashBalance)}
+            <span className="ml-1 text-sm font-semibold text-secondary">THB</span>
+          </p>
+          <div className="mt-4 grid grid-cols-2 gap-2.5">
             <Link
               href="/wallet/deposit"
-              className="flex min-h-[44px] items-center justify-center rounded-full text-sm font-semibold text-white bg-[linear-gradient(135deg,#F3C343_0%,#D4AF37_50%,#B8860B_100%)]"
+              className="flex min-h-[44px] items-center justify-center rounded-full bg-[linear-gradient(135deg,#F3C343_0%,#D4AF37_50%,#B8860B_100%)] text-sm font-semibold text-white transition active:scale-[0.98]"
             >
               + ฝากเงิน
             </Link>
             <Link
               href="/wallet/withdraw"
-              className="flex min-h-[44px] items-center justify-center rounded-full border-[1.5px] border-gold bg-[#FFFDF8] text-sm font-semibold text-[#8A6715]"
+              className="flex min-h-[44px] items-center justify-center rounded-full border-[1.5px] border-gold bg-[#FFFDF8] text-sm font-semibold text-[#8A6715] transition active:scale-[0.98]"
             >
               ถอนเงิน
             </Link>
           </div>
         </GoldCard>
 
-        <GoldCard className="p-4">
-          <div className="flex items-center justify-between">
-            <p className="text-sm font-bold text-espresso">Gold Wallet</p>
-            <p className="financial-digits text-sm font-bold text-espresso">
-              {formatGoldGrams(goldGrams)} กรัม
-              <span className="text-secondary"> (~฿{formatTHB(goldValue)} THB)</span>
-            </p>
-          </div>
-          <div className="mt-3 grid grid-cols-2 gap-2">
+        <GoldCard className="p-5">
+          <p className="text-xs font-semibold text-secondary">Gold Wallet</p>
+          <p className="financial-digits mt-1.5 text-2xl font-extrabold leading-tight text-espresso">
+            {formatGoldGrams(goldGrams)}
+            <span className="ml-1 text-sm font-semibold text-secondary">กรัม</span>
+          </p>
+          <p className="financial-digits mt-0.5 text-xs text-secondary">
+            ~฿{formatTHB(goldValue)} THB
+          </p>
+          <div className="mt-4 grid grid-cols-2 gap-2.5">
             <Link
               href="/redeem"
-              className="flex min-h-[44px] items-center justify-center rounded-full text-sm font-semibold text-white bg-[linear-gradient(135deg,#F3C343_0%,#D4AF37_50%,#B8860B_100%)]"
+              className="flex min-h-[44px] items-center justify-center rounded-full bg-[linear-gradient(135deg,#F3C343_0%,#D4AF37_50%,#B8860B_100%)] text-sm font-semibold text-white transition active:scale-[0.98]"
             >
               ขอรับทองแท่ง
             </Link>
             <Link
               href="/savings"
-              className="flex min-h-[44px] items-center justify-center rounded-full border-[1.5px] border-gold bg-[#FFFDF8] text-sm font-semibold text-[#8A6715]"
+              className="flex min-h-[44px] items-center justify-center rounded-full border-[1.5px] border-gold bg-[#FFFDF8] text-sm font-semibold text-[#8A6715] transition active:scale-[0.98]"
             >
               ประวัติการออม
             </Link>

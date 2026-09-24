@@ -1,13 +1,15 @@
 # HANDOVER — DEEGGOLD ออมทองออนไลน์ (aura_aurum_v2)
 
-> เอกสารส่งงานสำหรับเอเจนต์/นักพัฒนาคนถัดไป อัปเดตล่าสุด: 20 ก.ย. 2569
-> สเปกหลัก: `claude.md.md` (ฟีเจอร์ + business rules) และ `DESIGN.md` (design system "Yaowarat Sovereign Gold")
+> เอกสารส่งงานสำหรับเอเจนต์/นักพัฒนาคนถัดไป อัปเดตล่าสุด: 21 ก.ย. 2569
+> สเปกหลัก: `claude.md` (ฟีเจอร์ + business rules) และ `DESIGN.md` (design system "Yaowarat Sovereign Gold")
+> Repo: `https://github.com/ampholcha-byte/aura-aurum-v2` (branch `main`) · Deploy: Vercel (import จาก GitHub, auto-deploy ทุก push ขึ้น main)
 
 ## 1. วิธีรัน
 
 ```powershell
-npm run dev     # http://localhost:3000
-npm run build   # verify — ต้องผ่านก่อนส่งงาน (ปัจจุบันผ่าน 13 routes)
+npm run dev     # http://localhost:3000 (เทส LAN มือถือ: npm run dev -- --hostname 0.0.0.0 --port 3000)
+npm run build   # verify — ต้องผ่านก่อน push (ปัจจุบันผ่าน 13 routes)
+git push        # Vercel deploy อัตโนมัติหลัง push ขึ้น main
 ```
 
 Stack: Next.js 14.2.5 (App Router) + React 18 + TS + Tailwind 3.4 + zustand + lucide-react. ไม่มี test framework, ไม่มี backend — ทุกอย่างเป็น mock state ใน memory (zustand) + `setTimeout` จำลอง processing/QR
@@ -40,7 +42,7 @@ Shell ทุกหน้า (ยกเว้นหน้า success/QR ที่
 - `src/types/transaction.ts` — `TxnType = deposit | withdraw | saving | redeem`; ฟิลด์ `timestamp` (epoch ms, ใช้กรองช่วงเวลา), `grams?` (เฉพาะ redeem), `createdAt` (string โชว์)
 - `src/utils/formatters.ts` — `formatTHB` (2 ทศนิยม), `formatGoldGrams` (4 ทศนิยม), `calcGoldGrams`, `calcWithdrawNet` (`-10` บาท), `WITHDRAW_FEE`
 
-## 4. Business Rules (จาก claude.md.md §5 — ห้ามแหก)
+## 4. Business Rules (จาก claude.md §5 — ห้ามแหก)
 
 1. ทองทศนิยม 4 ตำแหน่ง · สูตร `กรัม = บาท ÷ ราคาขายออก/กรัม` · แลกรับจริงขั้นต่ำ **0.06g**
 2. ฝาก/ถอน 100–2,000,000 บาท · ฝากฟรี · ถอน fee 10 บาท (`Net = Amount − 10`)
@@ -52,7 +54,7 @@ Shell ทุกหน้า (ยกเว้นหน้า success/QR ที่
 
 ## 6. เสร็จแล้ว vs เหลือ
 
-**เสร็จ:** Sprint 1–4 ครบ (Home, ออมทอง+3 modal, DCA+summary, ฝาก/ถอน+QR+ใบเสร็จ×2) + โมดูลเพิ่ม: Redeem เต็มโฟลว์, History (filter ประเภท 5 แบบ + ช่วงเวลา ทั้งหมด/7/30 วัน), Profile (ข้อมูลสมาชิก, Address Book CRUD + default, เปลี่ยนรหัสผ่าน, PIN 6 หลัก)
+**เสร็จ:** Sprint 1–4 ครบ (Home, ออมทอง+3 modal, DCA+summary, ฝาก/ถอน+QR+ใบเสร็จ×2) + โมดูลเพิ่ม: Redeem เต็มโฟลว์, History (filter ประเภท 5 แบบ + ช่วงเวลา ทั้งหมด/7/30 วัน), Profile (ข้อมูลสมาชิก, Address Book CRUD + default, เปลี่ยนรหัสผ่าน, PIN 6 หลัก) + ขึ้น GitHub/Vercel แล้ว (เทสบนมือถือผ่าน production URL ได้)
 
 **เหลือ (ยังไม่ทำ):** ต่อ API/ราคาทองเรียลไทม์ + auth จริง · QR code จริง + บันทึกสลิป (ตอนนี้เป็นปุ่ม UI) · เชื่อม Address Book ของ profile เข้ากับฟอร์ม redeem (ตอนนี้ redeem มีที่อยู่ของตัวเอง) · ระบบ PIN บังคับใช้ตอนยืนยันรายการ · test/QA จริงจัง (responsive, edge cases)
 

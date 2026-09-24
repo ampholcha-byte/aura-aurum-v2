@@ -12,7 +12,7 @@ type MobileAppFrameProps = {
 export default function MobileAppFrame({ children }: MobileAppFrameProps) {
   return (
     <div
-      className="mx-auto min-h-screen bg-ivory shadow-[0_0_40px_rgba(122,15,26,0.08)]"
+      className="mx-auto flex min-h-screen flex-col bg-ivory shadow-[0_0_40px_rgba(122,15,26,0.08)]"
       style={{
         maxWidth: "430px",
         margin: "0 auto",

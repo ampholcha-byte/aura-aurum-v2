@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ShieldCheck, Truck, Store } from "lucide-react";
+import { Phone, ShieldCheck, Truck, Store } from "lucide-react";
 import TopAppBar from "@/components/common/TopAppBar";
 import BottomNav from "@/components/common/BottomNav";
 import GoldCard from "@/components/common/GoldCard";
@@ -11,7 +11,7 @@ import Button from "@/components/common/Button";
 import ProcessingModal from "@/components/modals/ProcessingModal";
 import { useGoldStore, MIN_REDEEM_GRAMS } from "@/stores/useGoldStore";
 import { useWalletStore } from "@/stores/useWalletStore";
-import { formatGoldGrams } from "@/utils/formatters";
+import { formatGoldGrams, formatTHB } from "@/utils/formatters";
 
 type Method = "delivery" | "pickup";
 
@@ -21,24 +21,34 @@ const branches = [
   "สาขาเมกาบางนา",
 ];
 
+/** ค่าจัดส่ง + ประกันภัยเต็มมูลค่า (mock — ขึ้นกับมูลค่าทองที่แลก) */
+const DELIVERY_FEE_THB = 35;
+
 /** โมดูลขอรับทอง — ส่งบ้าน / รับสาขา (ขั้นต่ำ 0.06 กรัม) */
 export default function RedeemPage() {
   const router = useRouter();
-  const { goldGrams, redeemGold } = useGoldStore();
+  const { goldGrams, sellPricePerGram, redeemGold } = useGoldStore();
   const { logRedeem } = useWalletStore();
   const [method, setMethod] = useState<Method>("delivery");
   const [grams, setGrams] = useState(MIN_REDEEM_GRAMS);
   const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
   const [branch, setBranch] = useState(branches[0]);
   const [processing, setProcessing] = useState(false);
 
   const eligible = goldGrams >= MIN_REDEEM_GRAMS;
   const progress = Math.min(100, (goldGrams / MIN_REDEEM_GRAMS) * 100);
+  const outOfRange = grams < MIN_REDEEM_GRAMS || grams > goldGrams;
+  const deliveryFee = method === "delivery" ? DELIVERY_FEE_THB : 0;
+  const goldValue = grams * sellPricePerGram;
+  const phoneDigits = phone.replace(/\D/g, "");
+  const phoneOk = /^0\d{8,9}$/.test(phoneDigits);
+
   const valid =
     eligible &&
     grams >= MIN_REDEEM_GRAMS &&
     grams <= goldGrams &&
-    (method === "pickup" || address.trim().length >= 10);
+    (method === "pickup" || (address.trim().length >= 10 && phoneOk));
 
   const submit = () => {
     if (!valid) return;
@@ -49,8 +59,9 @@ export default function RedeemPage() {
       logRedeem(+grams.toFixed(4), ref);
       setProcessing(false);
       const dest = method === "delivery" ? address.trim() : branch;
+      const phoneQ = method === "delivery" ? `&phone=${encodeURIComponent(phoneDigits)}` : "";
       router.push(
-        `/redeem/success?grams=${grams}&method=${method}&dest=${encodeURIComponent(dest)}&ref=${ref}`
+        `/redeem/success?grams=${grams}&method=${method}&dest=${encodeURIComponent(dest)}${phoneQ}&ref=${ref}`
       );
     }, 1500);
   };
@@ -110,11 +121,16 @@ export default function RedeemPage() {
                 step={0.0001}
                 value={grams}
                 onChange={(e) => setGrams(Number(e.target.value))}
-                className="financial-digits mt-2 min-h-[52px] w-full rounded-xl border-[1.5px] border-[#E8D8BA] bg-[#FDFCFA] px-4 text-xl font-bold text-espresso focus:border-gold focus:outline-none"
+                className={`financial-digits mt-2 min-h-[52px] w-full rounded-xl border-[1.5px] bg-[#FDFCFA] px-4 text-xl font-bold text-espresso focus:outline-none ${outOfRange ? "border-aus-red" : "border-[#E8D8BA] focus:border-gold"}`}
               />
               <p className="mt-1 text-[11px] text-secondary">
                 แลกได้ {formatGoldGrams(MIN_REDEEM_GRAMS)} – {formatGoldGrams(goldGrams)} กรัม
               </p>
+              {outOfRange && (
+                <p className="mt-1 text-[11px] font-semibold text-aus-red">
+                  กรุณาระบุน้ำหนักตั้งแต่ {formatGoldGrams(MIN_REDEEM_GRAMS)} ถึง {formatGoldGrams(goldGrams)} กรัม
+                </p>
+              )}
             </GoldCard>
 
             {method === "delivery" ? (
@@ -127,6 +143,21 @@ export default function RedeemPage() {
                   placeholder="บ้านเลขที่ ถนน แขวง/ตำบล เขต/อำเภอ จังหวัด รหัสไปรษณีย์"
                   className="mt-2 w-full rounded-xl border-[1.5px] border-[#E8D8BA] bg-[#FDFCFA] p-3 text-sm text-espresso focus:border-gold focus:outline-none"
                 />
+                <label className="mt-3 block text-xs font-semibold text-secondary">เบอร์โทรศัพท์ผู้รับ</label>
+                <div className="relative mt-1">
+                  <Phone size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-secondary" />
+                  <input
+                    type="tel"
+                    inputMode="numeric"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value.replace(/[^\d-]/g, ""))}
+                    placeholder="081-234-5678"
+                    className={`financial-digits mt-0 min-h-[44px] w-full rounded-lg border-[1.5px] bg-[#FDFCFA] pl-9 pr-3 text-sm text-espresso focus:outline-none ${phone !== "" && !phoneOk ? "border-aus-red" : "border-[#E8D8BA] focus:border-gold"}`}
+                  />
+                </div>
+                {phone !== "" && !phoneOk && (
+                  <p className="mt-1 text-[11px] font-semibold text-aus-red">เบอร์โทรไม่ถูกต้อง (ตัวอย่าง: 081-234-5678)</p>
+                )}
               </GoldCard>
             ) : (
               <GoldCard className="p-4">
@@ -142,6 +173,26 @@ export default function RedeemPage() {
                 </select>
               </GoldCard>
             )}
+
+            {/* สรุปค่าใช้จ่าย: มูลค่าทอง + ค่าจัดส่ง/ประกันภัย */}
+            <GoldCard className="space-y-1 p-4 text-sm">
+              <div className="flex justify-between">
+                <span className="text-secondary">มูลค่าทองที่แลก</span>
+                <b className="financial-digits text-espresso">฿{formatTHB(goldValue)} THB</b>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-secondary">{method === "delivery" ? "ค่าจัดส่ง + ประกันภัยเต็มมูลค่า" : "ค่าบริการรับที่สาขา"}</span>
+                <b className={`financial-digits ${method === "delivery" ? "text-aus-red" : "text-emerald"}`}>
+                  {method === "delivery" ? `-${formatTHB(deliveryFee)} THB` : "ฟรี"}
+                </b>
+              </div>
+              <div className="mt-1 flex justify-between border-t border-[#F5E5DC] pt-1">
+                <span className="font-semibold text-espresso">ยอดชำระเพิ่มเติม (เก็บปลายทาง)</span>
+                <b className={`financial-digits ${method === "delivery" ? "text-aus-red" : "text-emerald"}`}>
+                  {method === "delivery" ? `฿${formatTHB(deliveryFee)} THB` : "฿0.00 THB"}
+                </b>
+              </div>
+            </GoldCard>
 
             <div className="flex items-start gap-2 rounded-2xl bg-[#FFF9E6] p-3 text-xs text-espresso">
               <ShieldCheck size={16} className="mt-0.5 shrink-0 text-gold-dark" />

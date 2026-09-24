@@ -33,7 +33,7 @@ function DepositForm() {
       const ref = `REF ${Math.floor(10000000 + Math.random() * 89999999)}`;
       deposit(amount, ref);
       setProcessing(false);
-      router.push(`/wallet/deposit/success?amount=${amount}&ref=${encodeURIComponent(ref)}`);
+      router.push(`/wallet/deposit/success?amount=${amount}&ref=${encodeURIComponent(ref)}&channel=${channel}`);
     }, 1500);
   };
 

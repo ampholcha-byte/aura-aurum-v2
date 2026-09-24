@@ -14,6 +14,9 @@ function DepositSuccessInner() {
   const params = useSearchParams();
   const amount = Number(params.get("amount") ?? 1000);
   const ref = params.get("ref") ?? "REF 98824103";
+  const channelParam = params.get("channel");
+  const channelLabel =
+    channelParam === "truemoney" ? "TrueMoney Wallet" : channelParam === "ats" ? "หักบัญชีธนาคารอัตโนมัติ" : "QR Payment";
   const { cashBalance } = useWalletStore();
 
   return (
@@ -34,7 +37,7 @@ function DepositSuccessInner() {
         {formatTHB(amount)} <span className="text-sm">บาท</span>
       </p>
       <GoldCard className="space-y-2 p-4 text-sm">
-        <div className="flex justify-between"><span className="text-secondary">ช่องทาง</span><b className="text-espresso">QR Payment</b></div>
+        <div className="flex justify-between"><span className="text-secondary">ช่องทาง</span><b className="text-espresso">{channelLabel}</b></div>
         <div className="flex justify-between"><span className="text-secondary">วันที่เวลา</span><b className="text-espresso">19 ก.ย. 2569, 15:30 น.</b></div>
         <div className="flex items-center justify-between">
           <span className="text-secondary">รหัสอ้างอิง {ref}</span>

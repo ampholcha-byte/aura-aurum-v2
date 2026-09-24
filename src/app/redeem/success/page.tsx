@@ -15,6 +15,7 @@ function RedeemSuccessInner() {
   const grams = Number(params.get("grams") ?? 0.06);
   const method = params.get("method") === "pickup" ? "รับที่สาขา" : "จัดส่งถึงบ้าน";
   const dest = params.get("dest") ?? "-";
+  const phone = params.get("phone");
   const ref = params.get("ref") ?? "RDM-00000000";
   const { goldGrams } = useGoldStore();
 
@@ -34,6 +35,9 @@ function RedeemSuccessInner() {
       <GoldCard className="space-y-2 p-4 text-sm">
         <div className="flex justify-between"><span className="text-secondary">วิธีรับทอง</span><b className="text-espresso">{method}</b></div>
         <div className="flex justify-between gap-4"><span className="shrink-0 text-secondary">สถานที่</span><b className="text-right text-espresso">{dest}</b></div>
+        {phone && (
+          <div className="flex justify-between"><span className="text-secondary">เบอร์ติดต่อผู้รับ</span><b className="financial-digits text-espresso">{phone}</b></div>
+        )}
         <div className="flex justify-between"><span className="text-secondary">รหัสอ้างอิง</span><b className="text-espresso">{ref}</b></div>
       </GoldCard>
       <GoldCard className="p-4 text-center">

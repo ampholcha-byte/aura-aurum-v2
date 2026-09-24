@@ -1,8 +1,9 @@
 # HANDOVER — DEEGGOLD ออมทองออนไลน์ (aura_aurum_v2)
 
-> เอกสารส่งงานสำหรับเอเจนต์/นักพัฒนาคนถัดไป อัปเดตล่าสุด: 21 ก.ย. 2569
+> เอกสารส่งงานสำหรับเอเจนต์/นักพัฒนาคนถัดไป อัปเดตล่าสุด: 24 ก.ย. 2569
 > สเปกหลัก: `claude.md` (ฟีเจอร์ + business rules) และ `DESIGN.md` (design system "Yaowarat Sovereign Gold")
 > Repo: `https://github.com/ampholcha-byte/aura-aurum-v2` (branch `main`) · Deploy: Vercel (import จาก GitHub, auto-deploy ทุก push ขึ้น main)
+> Production URL: `https://aura-aurum-v2.vercel.app` (deploy แล้วถึง commit `d506bb0`)
 
 ## 1. วิธีรัน
 
@@ -31,7 +32,7 @@ Stack: Next.js 14.2.5 (App Router) + React 18 + TS + Tailwind 3.4 + zustand + lu
 | `/history` ประวัติ + filter | `src/app/history/page.tsx` | — (ทำเพิ่ม) |
 | `/profile` สมาชิก/ที่อยู่/ปลอดภัย | `src/app/profile/page.tsx` | — (ทำเพิ่ม) |
 
-Shell ทุกหน้า (ยกเว้นหน้า success/QR ที่ render เองเต็มจอ): `MobileAppFrame` (max-w 430px, bg `#FFF8F1`) ครอบผ่าน `src/app/layout.tsx`
+Shell ทุกหน้า (ยกเว้นหน้า success/QR ที่ render เองเต็มจอ): `MobileAppFrame` (max-w 430px, bg `#FFF8F1`, **`flex flex-col`**) ครอบผ่าน `src/app/layout.tsx` — `BottomNav` ใช้ `sticky bottom-0` + `mt-auto` เพื่อยึดขอบล่างจอแม้เนื้อหาสั้น (ห้ามเอา flex ออกจาก frame)
 
 ## 3. State (zustand)
 
@@ -56,7 +57,14 @@ Shell ทุกหน้า (ยกเว้นหน้า success/QR ที่
 
 **เสร็จ:** Sprint 1–4 ครบ (Home, ออมทอง+3 modal, DCA+summary, ฝาก/ถอน+QR+ใบเสร็จ×2) + โมดูลเพิ่ม: Redeem เต็มโฟลว์, History (filter ประเภท 5 แบบ + ช่วงเวลา ทั้งหมด/7/30 วัน), Profile (ข้อมูลสมาชิก, Address Book CRUD + default, เปลี่ยนรหัสผ่าน, PIN 6 หลัก) + ขึ้น GitHub/Vercel แล้ว (เทสบนมือถือผ่าน production URL ได้)
 
-**เหลือ (ยังไม่ทำ):** ต่อ API/ราคาทองเรียลไทม์ + auth จริง · QR code จริง + บันทึกสลิป (ตอนนี้เป็นปุ่ม UI) · เชื่อม Address Book ของ profile เข้ากับฟอร์ม redeem (ตอนนี้ redeem มีที่อยู่ของตัวเอง) · ระบบ PIN บังคับใช้ตอนยืนยันรายการ · test/QA จริงจัง (responsive, edge cases)
+**รอบ review/ปรับปรุง 24 ก.ย. 2569 (commit `d506bb0`, deploy แล้ว):**
+- แก้ BottomNav ลอยกลางหน้าเมื่อเนื้อหาสั้น → frame เป็น flex column + nav `mt-auto` (ทดสอบแล้วยึดล่างจอทุกหน้า)
+- Redeem: เพิ่มช่องเบอร์โทรผู้รับ (validate `^0\d{8,9}$` จากตัวเลขล้วน), กล่องสรุปมูลค่าทอง + ค่าจัดส่ง/ประกันภัย −35฿ (`DELIVERY_FEE_THB` mock คงที่, เก็บปลายทาง), input กรัมขอบแดง + hint แดงเมื่อเกินช่วง 0.06–ยอดคงเหลือ, ใบรับคำขอโชว์เบอร์ติดต่อ (query `phone`)
+- QrPayModal: ปุ่ม "บันทึก QR Code" เดิมผูกกับ `onClose` (กดแล้วยกเลิกรายการ) → แก้เป็นแสดง hint + ปุ่ม X ปิดแยกต่างหาก
+- ใบเสร็จฝากเงินเดิม hardcode "QR Payment" → ส่ง query `channel` (qr/truemoney/ats) มาแสดงช่องทางจริง
+- rename `claude.md.md` → `claude.md` (เนื้อหาเดิม 100%) + แก้ reference ในเอกสาร + เพิ่ม ignore ไฟล์ขยะ (`dev-server.log`, `*.tsbuildinfo`, `.freebuff/`)
+
+**เหลือ (ยังไม่ทำ):** ต่อ API/ราคาทองเรียลไทม์ + auth จริง · QR code จริง + บันทึกสลิป/บันทึก QR (ตอนนี้เป็นปุ่ม UI + hint) · เชื่อม Address Book ของ profile เข้ากับฟอร์ม redeem (ตอนนี้ redeem มีที่อยู่+เบอร์โทรของตัวเอง — ฟิลด์ตรงกัน พร้อมผูก) · ระบบ PIN บังคับใช้ตอนยืนยันรายการ · ค่าจัดส่ง 35฿ เป็น mock คงที่ ควรคิดตามมูลค่าทอง · Hero Card หน้าแรกควรซ่อน "+0.30%" เมื่อมูลค่าทองเป็นศูนย์ · test/QA จริงจัง (responsive, edge cases)
 
 ## 7. Gotchas (อ่านก่อนแก้โค้ด)
 
@@ -66,3 +74,8 @@ Shell ทุกหน้า (ยกเว้นหน้า success/QR ที่
 4. seed `goldGrams = 0.0133` **ไม่ถึงเกณฑ์แลก 0.06g** — หน้า redeem จะแสดง progress + ปุ่มออมเพิ่มจนกว่าจะซื้อทองเพิ่มผ่าน /savings (ตั้งใจตาม rule)
 5. ยอด mock ในสเปกขัดกันเอง (สินทรัพย์รวม 10,030 < Cash 30,145) — โค้ดคำนวณ total = cash + มูลค่าทองจริง ไม่ได้ hardcode ตามสเปก
 6. ข้อมูลทั้งหมดหายเมื่อ refresh (in-memory) — ถ้าต้องคงอยู่ให้เติม `zustand/middleware` persist
+7. **E2E เทสหลายหน้าต่อเนื่อง:** ต้องเดินผ่านลิงก์/ปุ่มในหน้า (client-side nav) เท่านั้น — โหลด URL ตรง/full reload จะรีเซ็ต store กลางทาง (เช่น เคส redeem ที่ต้องซื้อทองผ่าน /savings ก่อนจะพังทันที)
+8. **Dev server CSS ค้าง (JIT เสีย):** ถ้า style ที่ render ไม่ตรงโค้ด (utility หาย เช่น `.flex` ทั้งที่ class อยู่ใน DOM) — ให้ kill process ที่จับ port (`netstat -ano | findstr :3001` → `taskkill /F /PID <pid>`; Git Bash ใช้ `taskkill //F //PID`), ลบ `.next`, รันใหม่ — restart แบบปกติอาจชน `EADDRINUSE`
+9. ช่องทางฝากเงินไหลผ่าน query `channel` (`qr`/`truemoney`/`ats`): ฟอร์ม → success ตรง, หรือ ฟอร์ม → qr → success (หน้า qr แนบ `channel=qr` เอง) — ใบเสร็จ default เป็น "QR Payment" ถ้าไม่มี param
+10. หน้า success/QR render `<main min-h-screen>` เต็มจอเองโดยไม่มี BottomNav — หลัง frame เปลี่ยนเป็น flex ยังทำงานปกติ (ลูกเดี่ยว + min-h-screen = เต็มจอเหมือนเดิม) แต่ถ้าจะเติม BottomNav ให้หน้าพวกนี้ ต้องออกแบบโครง flex/`mt-auto` ของหน้านั้นเพิ่มเอง
+11. **ห้ามรัน `npm run build` ขณะ dev server รันอยู่** — build เขียนทับ `.next` ที่ dev ใช้ ทำให้ dev พังทันทีด้วย `500 MODULE_NOT_FOUND './xxx.js'` ใน webpack-runtime (เคยเจอจริง 24 ก.ย. 2569) — วิธีแก้: kill process ที่จับ port → ลบ `.next` → start ใหม่ · ถ้าต้อง build จริง ให้หยุด dev ก่อน หรือรัน dev บน port อื่น

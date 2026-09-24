@@ -92,6 +92,7 @@ export default function Home() {
         </section>
 
         {/* Dual Wallet */}
+        <div className="grid gap-4 md:grid-cols-2">
         <GoldCard className="p-4">
           <div className="flex items-center justify-between">
             <p className="text-sm font-bold text-espresso">Cash Wallet</p>
@@ -138,6 +139,7 @@ export default function Home() {
             </Link>
           </div>
         </GoldCard>
+        </div>
 
         {/* Trust Banner */}
         <div className="flex items-center gap-2 rounded-2xl bg-[#FFF9E6] p-3 text-xs text-espresso">

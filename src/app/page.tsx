@@ -28,7 +28,7 @@ export default function Home() {
       <header className="flex items-center gap-3 px-4 pt-4">
         {/* ตราเหรียญทอง DEEGGOLD (โลโก้จริง) */}
         <Image
-          src="/deeggold-logo.png"
+          src="/images/brand/logo.png"
           alt="DEEGGOLD"
           width={44}
           height={44}

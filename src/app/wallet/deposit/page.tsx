@@ -18,9 +18,17 @@ function DepositForm() {
   const router = useRouter();
   const { cashBalance, deposit } = useWalletStore();
   const [channel, setChannel] = useState<Channel>("qr");
-  const [amount, setAmount] = useState(1000);
+  const [amountText, setAmountText] = useState("1000");
   const [processing, setProcessing] = useState(false);
+  const amount = amountText === "" ? 0 : Number(amountText);
   const valid = amount >= 100 && amount <= 2000000;
+
+  /** กรองให้เหลือเฉพาะตัวเลข และตัดเลขศูนย์นำหน้าทันที (เช่น 000222 → 222) */
+  const handleAmountChange = (raw: string) => {
+    const digits = raw.replace(/\D/g, "").replace(/^0+(?=\d)/, "");
+    setAmountText(digits);
+  };
+  const setAmount = (v: number) => setAmountText(String(v));
 
   const submit = () => {
     if (!valid) return;
@@ -72,17 +80,24 @@ function DepositForm() {
         <div>
           <p className="mb-2 text-sm font-bold text-espresso">ระบุจำนวนเงิน</p>
           <input
-            type="number"
-            min={100}
-            max={2000000}
-            value={amount}
-            onChange={(e) => setAmount(Number(e.target.value))}
-            className="financial-digits min-h-[52px] w-full rounded-xl border-[1.5px] border-[#E8D8BA] bg-[#FDFCFA] px-4 text-xl font-bold text-espresso focus:border-gold focus:outline-none"
+            type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            autoComplete="off"
+            placeholder="0"
+            value={amountText}
+            onChange={(e) => handleAmountChange(e.target.value)}
+            className={`financial-digits min-h-[52px] w-full rounded-xl border-[1.5px] bg-[#FDFCFA] px-4 text-xl font-bold text-espresso focus:outline-none ${amountText !== "" && !valid ? "border-aus-red" : "border-[#E8D8BA] focus:border-gold"}`}
+            style={{ fontFeatureSettings: '"tnum"' }}
           />
           <div className="mt-3">
             <QuickChips options={[100, 500, 1000, 5000, 10000]} value={amount} onPick={setAmount} />
           </div>
-          <p className="mt-2 text-xs text-secondary">วงเงิน 100 – 2,000,000 บาท · ฟรีค่าธรรมเนียม</p>
+          {amountText !== "" && !valid ? (
+            <p className="mt-2 text-xs font-semibold text-aus-red">จำนวนเงินต้องอยู่ระหว่าง 100 – 2,000,000 บาท</p>
+          ) : (
+            <p className="mt-2 text-xs text-secondary">วงเงิน 100 – 2,000,000 บาท · ฟรีค่าธรรมเนียม</p>
+          )}
         </div>
 
         <Button disabled={!valid} onClick={submit}>

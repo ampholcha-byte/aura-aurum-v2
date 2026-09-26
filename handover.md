@@ -1,9 +1,9 @@
 # HANDOVER — DEEGGOLD ออมทองออนไลน์ (aura_aurum_v2)
 
-> เอกสารส่งงานสำหรับเอเจนต์/นักพัฒนาคนถัดไป อัปเดตล่าสุด: 24 ก.ย. 2569
+> เอกสารส่งงานสำหรับเอเจนต์/นักพัฒนาคนถัดไป อัปเดตล่าสุด: 26 ก.ย. 2569
 > สเปกหลัก: `claude.md` (ฟีเจอร์ + business rules) และ `DESIGN.md` (design system "Yaowarat Sovereign Gold")
 > Repo: `https://github.com/ampholcha-byte/aura-aurum-v2` (branch `main`) · Deploy: Vercel (import จาก GitHub, auto-deploy ทุก push ขึ้น main)
-> Production URL: `https://aura-aurum-v2.vercel.app` (deploy แล้วถึง commit `d506bb0`)
+> Production URL: `https://aura-aurum-v2.vercel.app` (deploy แล้วถึง commit `9ab8aa5`)
 
 ## 1. วิธีรัน
 
@@ -68,14 +68,17 @@ Shell ทุกหน้า (ยกเว้นหน้า success/QR ที่
 - **รองรับ iPad:** `MobileAppFrame` มือถือ 430px / จอ ≥768px (`md:`) ขยาย 700px กึ่งกลางจอ — ย้าย inline `maxWidth` ออกเป็น Tailwind class เพื่อให้ responsive ทำงาน · Home: การ์ด Cash/Gold Wallet จับคู่ 2 คอลัมน์บน iPad (`md:grid-cols-2`) หน้าอื่นยังคอลัมน์เดียว (กรอบขยายให้แล้ว)
 - **Visual Hierarchy การ์ด Wallet (Home):** ตัวเลขยอดเงินเป็น hero (text-2xl extrabold, หน่วย THB/กรัม ตัวเล็กสีเทา) · padding การ์ด p-5 · **สีปุ่มเหมือนเดิมตาม feedback** (ปุ่มหลัก = ทองไล่เฉดตัวขาว, ปุ่มรอง = ครีมขอบทอง 1.5px)
 
-**รอบ Header/Ticker 24 ก.ย. 2569 (ยังไม่ push ณ จุดพักงาน — commit รวมท้ายรอบ):**
+**รอบ Header/Ticker 24 ก.ย. 2569 (commit `7914a60`, deploy แล้ว):**
 - **Header (Home):** โลโก้เหรียญ DEEGGOLD จริง (`public/images/brand/logo.png`, 397×397, แสดงผล 44px ผ่าน `next/image` + `priority`) แทนวงกลม CSS · ชื่อแบรนด์แยก 2 บรรทัด "ทองแท่ง 96.5%" / "By DEEGGOLD" · ป้าย "ยืนยันเบอร์โทรแล้ว" ชิดขวาในระนาบเดียวกับชื่อแบรนด์ · วงกลมโปรไฟล์ "สม" 40px พร้อม aria-label
 - **Gold Price Ticker (Home):** แยก 2 การ์ดย่อยซ้าย-ขวา (รับซื้อ/ขายออก) พร้อมป้าย ▲ +50 สีแดง + "ต่อน้ำหนัก 15.244 กรัม" · ป้าย "เปิด 24 ชม." ย้ายไปมุมขวาของหัวข้อ "ราคาทองวันนี้" (จุดเขียว pulse) — **ตัวเลข +50 เป็น mock คงที่ ควรผูก store ภายหลัง**
 - **Wallet Card Alignment:** การ์ด Cash/Gold ใช้ `flex flex-col` + คอนเทนต์บนห่อ `flex-grow` → แถวปุ่มชิดล่างการ์ดเสมอ แนวปุ่มตรงกันทั้งมือถือ/iPad (วัดจริง top เท่ากันเป๊ะ)
 - ไฟล์โลโก้เวอร์ชันแรก 2.7MB → บีบอัดเหลือ 131KB → ต่อมาแทนด้วยไฟล์ความละเอียดสูง 397×397 (358KB)
-- **รอบจัดระเบียบภาพแบรนด์ 26 ก.ย. 2569:** ย้ายโลโก้ไป `public/images/brand/logo.png` (ลบ `public/deeggold-logo.png` เดิม) — อนาคตเพิ่มภาพแทรกอื่น ๆ ไว้ใต้ `public/images/` ตามหมวด (เช่น `brand/`, `banners/`) เวลาเปลี่ยนภาพแค่ทับไฟล์ในโฟลเดอร์ ทุกจุดที่อ้างอิง path เดิมเปลี่ยนตามทันที; แก้ `src/app/page.tsx` ชี้ path ใหม่แล้ว + ยืนยันหน้าเว็บโหลดภาพสำเร็จ
 
-**เหลือ (ยังไม่ทำ):** ต่อ API/ราคาทองเรียลไทม์ + auth จริง · QR code จริง + บันทึกสลิป/บันทึก QR (ตอนนี้เป็นปุ่ม UI + hint) · เชื่อม Address Book ของ profile เข้ากับฟอร์ม redeem (ตอนนี้ redeem มีที่อยู่+เบอร์โทรของตัวเอง — ฟิลด์ตรงกัน พร้อมผูก) · ระบบ PIN บังคับใช้ตอนยืนยันรายการ · ค่าจัดส่ง 35฿ เป็น mock คงที่ ควรคิดตามมูลค่าทอง · Hero Card หน้าแรกควรซ่อน "+0.30%" เมื่อมูลค่าทองเป็นศูนย์ · test/QA จริงจัง (responsive, edge cases)
+**รอบ 26 ก.ย. 2569 (commit `9ab8aa5`, deploy แล้ว — ยืนยัน prod 200 ทั้งหน้าแรกและ `/images/brand/logo.png`):**
+- **Amount Input หน้าฝากเงิน (`/wallet/deposit`):** ตัดเลขศูนย์นำหน้าขณะพิมพ์ (`000222` → `222`), กรอง non-numeric ทิ้ง, เปลี่ยนเป็น `type="text"` + `inputMode="numeric"` + `pattern="[0-9]*"` (คีย์บอร์ดตัวเลขมือถือ), tnum ผ่าน class `financial-digits` + inline `fontFeatureSettings`, state เป็น string (`amountText`) แล้วแปลงเป็นตัวเลขตอนใช้ · เกินวงเงิน 100–2,000,000 → ขอบแดง + ข้อความเตือน + ปุ่ม disabled · QuickChips ยังทำงานปกติ · **แนวทางเดียวกันควรขยายไป withdraw / savings/create-plan / InstantBuyModal (ยังเป็น type="number" อยู่)**
+- **โฟลเดอร์ภาพแบรนด์:** ย้ายโลโก้ไป `public/images/brand/logo.png` (ลบ `public/deeggold-logo.png` เดิม) — อนาคตเพิ่มภาพแทรกไว้ใต้ `public/images/` ตามหมวด (brand/, banners/, ...) เวลาเปลี่ยนภาพแค่ทับไฟล์ในโฟลเดอร์ โค้ดไม่ต้องแตะ · แก้ `src/app/page.tsx` ชี้ path ใหม่ + ยืนยันโหลดภาพสำเร็จทั้ง dev และ prod
+
+**เหลือ (ยังไม่ทำ):** ต่อ API/ราคาทองเรียลไทม์ + auth จริง · QR code จริง + บันทึกสลิป/บันทึก QR (ตอนนี้เป็นปุ่ม UI + hint) · เชื่อม Address Book ของ profile เข้ากับฟอร์ม redeem (ตอนนี้ redeem มีที่อยู่+เบอร์โทรของตัวเอง — ฟิลด์ตรงกัน พร้อมผูก) · ระบบ PIN บังคับใช้ตอนยืนยันรายการ · ค่าจัดส่ง 35฿ เป็น mock คงที่ ควรคิดตามมูลค่าทอง · Hero Card หน้าแรกควรซ่อน "+0.30%" เมื่อมูลค่าทองเป็นศูนย์ · test/QA จริงจัง (responsive, edge cases) · **ขยาย pattern Amount Input (ตัดศูนย์นำหน้า+validation) ไป withdraw / create-plan / InstantBuyModal** · **ผูก ▲+50 ใน Ticker เข้า store** · **zustand persist** · **favicon จากโลโก้**
 
 ## 7. Gotchas (อ่านก่อนแก้โค้ด)
 

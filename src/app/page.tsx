@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ArrowDownToLine, ArrowUpFromLine, Package, History, ChevronRight, ShieldCheck, Check } from "lucide-react";
 import BottomNav from "@/components/common/BottomNav";
 import GoldCard from "@/components/common/GoldCard";
+import GoldPriceAnnouncementModal from "@/components/modals/GoldPriceAnnouncementModal";
 import { useWalletStore } from "@/stores/useWalletStore";
 import { useGoldStore } from "@/stores/useGoldStore";
 import { formatTHB, formatGoldGrams } from "@/utils/formatters";
@@ -201,6 +202,7 @@ export default function Home() {
       </main>
 
       <BottomNav />
+      <GoldPriceAnnouncementModal barBuy={buyPricePerBaht} barSell={sellPricePerBaht} />
     </>
   );
 }

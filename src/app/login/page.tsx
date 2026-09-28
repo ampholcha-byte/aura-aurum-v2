@@ -1,21 +1,31 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Phone, Lock, Eye, EyeOff, MessageCircle } from "lucide-react";
+import { Phone, Lock, Eye, EyeOff, MessageCircle, AlertCircle } from "lucide-react";
+import { useAuthStore } from "@/stores/useAuthStore";
 
-/** หน้าเข้าสู่ระบบ — การ์ดกลางจอธีม DEEGGOLD (mock auth: กรอกอะไรก็เข้าได้) */
-export default function LoginPage() {
+/** หน้าเข้าสู่ระบบ — การ์ดกลางจอธีม DEEGGOLD (mock auth: สมชาย / 123456 หรือเบอร์ 081-234-5678) */
+function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const login = useAuthStore((s) => s.login);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push("/");
+    const err = login(username, password);
+    if (err) {
+      setError(err);
+      return;
+    }
+    const next = searchParams.get("next");
+    router.replace(next && next.startsWith("/") ? next : "/");
   };
 
   const inputCls =
@@ -96,6 +106,13 @@ export default function LoginPage() {
               </div>
             </div>
 
+            {/* ข้อความ error */}
+            {error && (
+              <p className="flex items-center gap-1.5 rounded-lg bg-[#FDF0F0] px-3 py-2 text-xs font-semibold text-[#B31D1D]">
+                <AlertCircle size={14} className="shrink-0" /> {error}
+              </p>
+            )}
+
             {/* ปุ่มเข้าสู่ระบบ */}
             <button
               type="submit"
@@ -109,7 +126,7 @@ export default function LoginPage() {
           <div className="mt-5 flex flex-col items-center gap-2.5">
             <p className="text-xs text-secondary">
               ยังไม่มีบัญชี?{" "}
-              <Link href="/" className="font-bold text-burgundy underline-offset-2 hover:underline">
+              <Link href="/login" className="font-bold text-burgundy underline-offset-2 hover:underline">
                 สมัครสมาชิกใหม่
               </Link>
             </p>
@@ -122,6 +139,9 @@ export default function LoginPage() {
               <MessageCircle size={15} />
               ติดต่อเจ้าหน้าที่ผ่าน Line OA
             </a>
+            <p className="financial-digits rounded-lg bg-[#FFF9E6] px-3 py-1.5 text-[11px] text-[#8A6715]">
+              ทดลองเข้าระบบ: สมชาย / 123456
+            </p>
           </div>
         </div>
       </main>
@@ -133,5 +153,13 @@ export default function LoginPage() {
         </p>
       </footer>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
   );
 }

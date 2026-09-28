@@ -3,12 +3,14 @@
 import { useState } from "react";
 import {
   Check, Pencil, MapPin, Plus, Trash2, Star,
-  Lock, KeyRound, ChevronRight, ShieldCheck, X,
+  Lock, KeyRound, ChevronRight, ShieldCheck, X, LogOut,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import TopAppBar from "@/components/common/TopAppBar";
 import BottomNav from "@/components/common/BottomNav";
 import GoldCard from "@/components/common/GoldCard";
 import Button from "@/components/common/Button";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 type Member = { name: string; phone: string; email: string; idCard: string };
 type Address = {
@@ -36,12 +38,16 @@ function Sheet({ title, onClose, children }: { title: string; onClose: () => voi
 
 /** หน้าโปรไฟล์ — ข้อมูลสมาชิก, Address Book, ความปลอดภัย */
 export default function ProfilePage() {
+  const router = useRouter();
+  const authMember = useAuthStore((s) => s.member);
+  const logout = useAuthStore((s) => s.logout);
   const [member, setMember] = useState<Member>({
-    name: "นายสมชาย มั่งคั่งกิจ",
-    phone: "081-234-5678",
-    email: "somchai@example.com",
-    idCard: "1-1001-23456-78-9",
+    name: authMember?.name ?? "นายสมชาย มั่งคั่งกิจ",
+    phone: authMember?.phone ?? "081-234-5678",
+    email: authMember?.email ?? "somchai@example.com",
+    idCard: authMember?.idCard ?? "1-1001-23456-78-9",
   });
+  const [logoutAsk, setLogoutAsk] = useState(false);
   const [addresses, setAddresses] = useState<Address[]>([
     { id: "a1", label: "บ้าน", name: "สมชาย มั่งคั่งกิจ", phone: "081-234-5678", detail: "123/45 ถ.เยาวราช แขวงสัมพันธวงศ์ เขตสัมพันธวงศ์ กรุงเทพฯ 10100", isDefault: true },
     { id: "a2", label: "ที่ทำงาน", name: "สมชาย มั่งคั่งกิจ", phone: "081-234-5678", detail: "99 อาคารโกลด์ทาวเวอร์ ชั้น 12 ถ.สาทร แขวงยานนาวา เขตสาทร กรุงเทพฯ 10120", isDefault: false },
@@ -129,7 +135,7 @@ export default function ProfilePage() {
         <section className="rounded-2xl bg-gradient-to-br from-[#7A0F1A] to-[#660C15] p-5 text-white shadow-lg">
           <div className="flex items-center gap-3">
             <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[#F3C343] to-[#B8860B] text-xl font-extrabold">
-              ส
+              {member.name.charAt(3)}
             </div>
             <div className="flex-1">
               <p className="text-base font-bold">{member.name}</p>
@@ -233,8 +239,40 @@ export default function ProfilePage() {
             </button>
           </GoldCard>
         </section>
+
+        {/* ออกจากระบบ */}
+        <button
+          onClick={() => setLogoutAsk(true)}
+          className="flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full border-[1.5px] border-aus-red/40 bg-white text-sm font-bold text-aus-red transition active:scale-[0.98]"
+        >
+          <LogOut size={17} /> ออกจากระบบ
+        </button>
       </main>
       <BottomNav />
+
+      {/* ยืนยันออกจากระบบ */}
+      {logoutAsk && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-6 backdrop-blur-sm">
+          <div className="w-full max-w-[340px] rounded-2xl bg-white p-5 text-center">
+            <p className="text-base font-bold text-espresso">ออกจากระบบ?</p>
+            <p className="mt-1 text-xs text-secondary">คุณจะต้องเข้าสู่ระบบอีกครั้งเพื่อใช้งาน</p>
+            <div className="mt-4 grid grid-cols-2 gap-2">
+              <button
+                onClick={() => setLogoutAsk(false)}
+                className="min-h-[44px] rounded-full border-[1.5px] border-[#E8D8BA] text-sm font-semibold text-secondary"
+              >
+                ยกเลิก
+              </button>
+              <button
+                onClick={() => { logout(); router.replace("/login"); }}
+                className="min-h-[44px] rounded-full bg-[linear-gradient(135deg,#7A0F1A_0%,#660C15_100%)] text-sm font-bold text-white"
+              >
+                ออกจากระบบ
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ชีทแก้ไขข้อมูลสมาชิก */}
       {sheet === "profile" && (

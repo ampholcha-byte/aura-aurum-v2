@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import MobileAppFrame from "@/components/common/MobileAppFrame";
+import AuthGuard from "@/components/common/AuthGuard";
 
 export const metadata: Metadata = {
   title: "DEEGGOLD — ออมทองออนไลน์",
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="th">
       <body>
-        <MobileAppFrame>{children}</MobileAppFrame>
+        <MobileAppFrame>
+          <AuthGuard>{children}</AuthGuard>
+        </MobileAppFrame>
       </body>
     </html>
   );

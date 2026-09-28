@@ -8,6 +8,7 @@ import TopAppBar from "@/components/common/TopAppBar";
 import BottomNav from "@/components/common/BottomNav";
 import GoldCard from "@/components/common/GoldCard";
 import Button from "@/components/common/Button";
+import LegalLinksFooter from "@/components/common/LegalLinksFooter";
 import ProcessingModal from "@/components/modals/ProcessingModal";
 import { useGoldStore, MIN_REDEEM_GRAMS } from "@/stores/useGoldStore";
 import { useWalletStore } from "@/stores/useWalletStore";
@@ -204,6 +205,9 @@ export default function RedeemPage() {
             </Button>
           </>
         )}
+
+        {/* ลิงก์นโยบาย/ข้อกฎหมาย (PDPA) — แสดงเสมอไม่ว่าครบเกณฑ์หรือไม่ */}
+        <LegalLinksFooter />
       </main>
       <BottomNav />
       {processing && <ProcessingModal />}

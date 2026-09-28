@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { X, ShieldCheck, Cookie, FileText, FileDown } from "lucide-react";
+import { X, ShieldCheck, Cookie, FileText, FileDown, ScrollText } from "lucide-react";
 import { LEGAL_DOCS, type LegalDoc } from "@/data/legal/legalDocs";
 
 type PolicyKey = LegalDoc["key"];
@@ -10,6 +10,7 @@ const ICONS: Record<PolicyKey, typeof ShieldCheck> = {
   privacy: ShieldCheck,
   cookie: Cookie,
   dsr: FileText,
+  terms: ScrollText,
 };
 
 /** ป้ายลิงก์ใน footer (สั้น) — เอกสารเต็มอยู่ใน LEGAL_DOCS */
@@ -17,6 +18,7 @@ const LINK_LABELS: Record<PolicyKey, string> = {
   privacy: "นโยบายความเป็นส่วนตัว",
   cookie: "นโยบายการใช้คุกกี้",
   dsr: "แบบฟอร์มขอใช้สิทธิ (PDPA)",
+  terms: "ข้อตกลงและเงื่อนไข",
 };
 
 /** Footer legal links (PDPA): Privacy / Cookie / Data Subject Rights — เปิด modal รายละเอียด */

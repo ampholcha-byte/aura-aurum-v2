@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 import { ArrowDownToLine, ArrowUpFromLine, Package, History, ChevronRight, ShieldCheck, Check } from "lucide-react";
 import BottomNav from "@/components/common/BottomNav";
 import GoldCard from "@/components/common/GoldCard";
 import GoldPriceAnnouncementModal from "@/components/modals/GoldPriceAnnouncementModal";
+import ProfileDrawer from "@/components/common/ProfileDrawer";
 import { useWalletStore } from "@/stores/useWalletStore";
 import { useGoldStore } from "@/stores/useGoldStore";
 import { formatTHB, formatGoldGrams } from "@/utils/formatters";
@@ -20,6 +22,7 @@ const quickActions = [
 export default function Home() {
   const { cashBalance, transactions } = useWalletStore();
   const { goldGrams, sellPricePerGram, buyPricePerBaht, sellPricePerBaht } = useGoldStore();
+  const [profileOpen, setProfileOpen] = useState(false);
   const goldValue = goldGrams * sellPricePerGram;
   const total = cashBalance + goldValue;
 
@@ -48,8 +51,10 @@ export default function Home() {
           <Check size={11} /> ยืนยันเบอร์โทรแล้ว
         </span>
         <button
-          aria-label="โปรไฟล์"
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#F3C343] to-[#B8860B] text-sm font-bold text-white shadow-[0_4px_14px_rgba(184,134,11,0.25)]"
+          aria-label="เปิดโปรไฟล์และการตั้งค่า"
+          aria-haspopup="dialog"
+          onClick={() => setProfileOpen(true)}
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#F3C343] to-[#B8860B] text-sm font-bold text-white shadow-[0_4px_14px_rgba(184,134,11,0.25)] transition active:scale-95"
         >
           สม
         </button>
@@ -207,6 +212,7 @@ export default function Home() {
 
       <BottomNav />
       <GoldPriceAnnouncementModal barBuy={buyPricePerBaht} barSell={sellPricePerBaht} />
+      <ProfileDrawer open={profileOpen} onClose={() => setProfileOpen(false)} />
     </>
   );
 }

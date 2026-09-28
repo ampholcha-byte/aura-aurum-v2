@@ -1,9 +1,9 @@
 # HANDOVER — DEEGGOLD ออมทองออนไลน์ (aura_aurum_v2)
 
-> เอกสารส่งงานสำหรับเอเจนต์/นักพัฒนาคนถัดไป อัปเดตล่าสุด: 26 ก.ย. 2569
+> เอกสารส่งงานสำหรับเอเจนต์/นักพัฒนาคนถัดไป อัปเดตล่าสุด: 28 ก.ย. 2569
 > สเปกหลัก: `claude.md` (ฟีเจอร์ + business rules) และ `DESIGN.md` (design system "Yaowarat Sovereign Gold")
 > Repo: `https://github.com/ampholcha-byte/aura-aurum-v2` (branch `main`) · Deploy: Vercel (import จาก GitHub, auto-deploy ทุก push ขึ้น main)
-> Production URL: `https://aura-aurum-v2.vercel.app` (deploy แล้วถึง commit `9ab8aa5`)
+> Production URL: `https://aura-aurum-v2.vercel.app` (deploy แล้วถึง commit `8995ece`)
 
 ## 1. วิธีรัน
 
@@ -20,6 +20,7 @@ Stack: Next.js 14.2.5 (App Router) + React 18 + TS + Tailwind 3.4 + zustand + lu
 | Route | ไฟล์ | Screen ref |
 |---|---|---|
 | `/` Home Dashboard | `src/app/page.tsx` | SCREEN_42 |
+| `/login` เข้าสู่ระบบ | `src/app/login/page.tsx` | — (ทำเพิ่ม, หน้า public เดียว) |
 | `/savings` ออมทอง | `src/app/savings/page.tsx` | SCREEN_28 (+26/24/22 via modal) |
 | `/savings/create-plan` สร้างแผน DCA | `src/app/savings/create-plan/page.tsx` | SCREEN_20/18 |
 | `/wallet/deposit` ฝากเงิน | `src/app/wallet/deposit/page.tsx` | SCREEN_16 |
@@ -34,8 +35,11 @@ Stack: Next.js 14.2.5 (App Router) + React 18 + TS + Tailwind 3.4 + zustand + lu
 
 Shell ทุกหน้า (ยกเว้นหน้า success/QR ที่ render เองเต็มจอ): `MobileAppFrame` (max-w 430px, bg `#FFF8F1`, **`flex flex-col`**) ครอบผ่าน `src/app/layout.tsx` — `BottomNav` ใช้ `sticky bottom-0` + `mt-auto` เพื่อยึดขอบล่างจอแม้เนื้อหาสั้น (ห้ามเอา flex ออกจาก frame)
 
+**AuthGuard (`src/components/common/AuthGuard.tsx`):** ครอบทุกหน้าผ่าน layout — ยังไม่ล็อกอิน → redirect `/login?next=<path>` แล้วส่งกลับหน้าเดิมหลังล็อกอิน · หน้า public (ไม่บังคับ login): `/login` เท่านั้น (รายการ `PUBLIC_PATHS` ในไฟล์) · restore session ก่อน render กัน flash เนื้อหา
+
 ## 3. State (zustand)
 
+- `src/stores/useAuthStore.ts` — **ระบบสมาชิก mock:** บัญชีเดียว `สมชาย / 123456` (เข้าได้ทั้งชื่อหรือเบอร์ `081-234-5678`) · `login()` คืน error string หรือ null · session เก็บ `sessionStorage` key `deeggold-session` (ปิดแท็บ = ต้องล็อกอินใหม่) · `restore()` / `logout()`
 - `src/stores/useWalletStore.ts` — `cashBalance` (seed 30,145.45), `transactions[]`
   - `deposit` / `withdraw` (กระทบยอด Cash) · `payForGold` (ตัด Cash + log "ออมทอง") · `logSaving` (ออมผ่าน QR ไม่กระทบ Cash) · `logRedeem(grams, ref)`
 - `src/stores/useGoldStore.ts` — `goldGrams` (seed **0.0133**), `sellPricePerGram = 49650/15.244`, `buyPricePerBaht 48750`, `sellPricePerBaht 49650`, `plans[]`
@@ -78,7 +82,14 @@ Shell ทุกหน้า (ยกเว้นหน้า success/QR ที่
 - **Amount Input หน้าฝากเงิน (`/wallet/deposit`):** ตัดเลขศูนย์นำหน้าขณะพิมพ์ (`000222` → `222`), กรอง non-numeric ทิ้ง, เปลี่ยนเป็น `type="text"` + `inputMode="numeric"` + `pattern="[0-9]*"` (คีย์บอร์ดตัวเลขมือถือ), tnum ผ่าน class `financial-digits` + inline `fontFeatureSettings`, state เป็น string (`amountText`) แล้วแปลงเป็นตัวเลขตอนใช้ · เกินวงเงิน 100–2,000,000 → ขอบแดง + ข้อความเตือน + ปุ่ม disabled · QuickChips ยังทำงานปกติ · **แนวทางเดียวกันควรขยายไป withdraw / savings/create-plan / InstantBuyModal (ยังเป็น type="number" อยู่)**
 - **โฟลเดอร์ภาพแบรนด์:** ย้ายโลโก้ไป `public/images/brand/logo.png` (ลบ `public/deeggold-logo.png` เดิม) — อนาคตเพิ่มภาพแทรกไว้ใต้ `public/images/` ตามหมวด (brand/, banners/, ...) เวลาเปลี่ยนภาพแค่ทับไฟล์ในโฟลเดอร์ โค้ดไม่ต้องแตะ · แก้ `src/app/page.tsx` ชี้ path ใหม่ + ยืนยันโหลดภาพสำเร็จทั้ง dev และ prod
 
-**เหลือ (ยังไม่ทำ):** ต่อ API/ราคาทองเรียลไทม์ + auth จริง · QR code จริง + บันทึกสลิป/บันทึก QR (ตอนนี้เป็นปุ่ม UI + hint) · เชื่อม Address Book ของ profile เข้ากับฟอร์ม redeem (ตอนนี้ redeem มีที่อยู่+เบอร์โทรของตัวเอง — ฟิลด์ตรงกัน พร้อมผูก) · ระบบ PIN บังคับใช้ตอนยืนยันรายการ · ค่าจัดส่ง 35฿ เป็น mock คงที่ ควรคิดตามมูลค่าทอง · Hero Card หน้าแรกควรซ่อน "+0.30%" เมื่อมูลค่าทองเป็นศูนย์ · test/QA จริงจัง (responsive, edge cases) · **ขยาย pattern Amount Input (ตัดศูนย์นำหน้า+validation) ไป withdraw / create-plan / InstantBuyModal** · **ผูก ▲+50 ใน Ticker เข้า store** · **zustand persist** · **favicon จากโลโก้**
+**รอบ 28 ก.ย. 2569 (commits `9b2ebb6`→`8995ece`, deploy แล้ว — ยืนยัน prod 200 ทุกหน้า):**
+- **Gold Price Announcement Modal (`GoldPriceAnnouncementModal.tsx`):** เด้งอัตโนมัติหน้าแรก สไตล์ตารางสมาคมค้าทองคำ (แถบหัวทองไล่เฉด, ตารางแท่ง/รูปพรรณ รับซื้อ-ขายออก tnum, ▲+50, วันที่ไทย + "ประกาศ 16:02 น. (รอบที่ 19)") · ปิด 3 ทาง (X/ปุ่ม/backdrop) · checkbox "ไม่ต้องแสดงอีกในวันนี้" เก็บ `localStorage` key `deeggold-price-announce-dismissed` (YYYY-MM-DD) · ราคาแท่งดึงจาก `useGoldStore` · รูปพรรณ/การเปลี่ยนแปลง/เวลายังเป็น default props
+- **หน้า Login (`/login`):** การ์ดกลางจอธีม DEEGGOLD (โลโก้ 72px, ไอคอน Phone/Lock, Eye toggle, "ลืมรหัสผ่าน?" แดง #B31D1D, ปุ่ม burgundy gradient) · validate ผ่าน `useAuthStore` — ผิดมีกล่องแดง · มี hint "ทดลองเข้าระบบ: สมชาย / 123456" · ห่อ `<Suspense>` เพราะใช้ `useSearchParams` (next param)
+- **ระบบสมาชิก mock:** `useAuthStore` + `AuthGuard` (ดู §2/§3) · Logout ในหน้า Profile (dialog ยืนยัน → ล้าง session → `/login`) · Profile ดึงข้อมูลสมาชิกจาก auth store
+- **PDPA Legal Footer (`LegalLinksFooter.tsx`):** 3 ลิงก์ (Privacy/Cookie/DSR) แสดง**เสมอ**บนหน้า redeem (ทั้งในฟอร์มเหนือปุ่มยืนยัน และโหมดไม่ครบเกณฑ์) — กดเปิด bottom-sheet modal เนื้อหาเต็ม · **เนื้อหาเอกสารแยกที่ `src/data/legal/legalDocs.ts`** (title/updatedAt/sections/fileUrl เผื่อผูก PDF ที่ `public/documents/legal/`) — แก้ข้อความที่เดียว ไม่ต้องแตะ UI
+- **แก้คีย์บอร์ดมือถือหน้า login:** ลบ `inputMode="tel"` ที่บังคับแผงตัวเลข (พิมพ์ "สมชาย" ไม่ได้บนมือถือ) → คีย์บอร์ดปกติ · **บทเรียน: ช่องที่รับทั้งตัวอักษร+ตัวเลข ห้ามใส่ inputMode numeric/tel** — เช็คที่เหลือในแอปด้วย
+
+**เหลือ (ยังไม่ทำ):** ต่อ API/ราคาทองเรียลไทม์ + auth จริง (ตอนนี้ mock บัญชีเดียว สมชาย/123456) · หน้าสมัครสมาชิก `/register` · QR code จริง + บันทึกสลิป (ตอนนี้เป็นปุ่ม UI + hint) · เชื่อม Address Book ของ profile เข้ากับฟอร์ม redeem (ฟิลด์ตรงกัน พร้อมผูก) · ระบบ PIN บังคับใช้ตอนยืนยันรายการ · ค่าจัดส่ง 35฿ เป็น mock คงที่ ควรคิดตามมูลค่าทอง · Hero Card หน้าแรกควรซ่อน "+0.30%" เมื่อมูลค่าทองเป็นศูนย์ · test/QA จริงจัง (responsive, edge cases) · **ขยาย pattern Amount Input ไป withdraw / create-plan / InstantBuyModal** · **เช็ค inputMode ทั้งแอป (บทเรียน gotcha login)** · **ผูกข้อมูลรูปพรรณ/เวลาประกาศ/▲+50 เข้า store** · **zustand persist** · **favicon จากโลโก้** · **ขยาย LegalLinksFooter ไปหน้า withdraw/deposit/create-plan**
 
 ## 7. Gotchas (อ่านก่อนแก้โค้ด)
 
@@ -93,3 +104,4 @@ Shell ทุกหน้า (ยกเว้นหน้า success/QR ที่
 9. ช่องทางฝากเงินไหลผ่าน query `channel` (`qr`/`truemoney`/`ats`): ฟอร์ม → success ตรง, หรือ ฟอร์ม → qr → success (หน้า qr แนบ `channel=qr` เอง) — ใบเสร็จ default เป็น "QR Payment" ถ้าไม่มี param
 10. หน้า success/QR render `<main min-h-screen>` เต็มจอเองโดยไม่มี BottomNav — หลัง frame เปลี่ยนเป็น flex ยังทำงานปกติ (ลูกเดี่ยว + min-h-screen = เต็มจอเหมือนเดิม) แต่ถ้าจะเติม BottomNav ให้หน้าพวกนี้ ต้องออกแบบโครง flex/`mt-auto` ของหน้านั้นเพิ่มเอง
 11. **ห้ามรัน `npm run build` ขณะ dev server รันอยู่** — build เขียนทับ `.next` ที่ dev ใช้ ทำให้ dev พังทันทีด้วย `500 MODULE_NOT_FOUND './xxx.js'` ใน webpack-runtime (เคยเจอจริง 24 ก.ย. 2569) — วิธีแก้: kill process ที่จับ port → ลบ `.next` → start ใหม่ · ถ้าต้อง build จริง ให้หยุด dev ก่อน หรือรัน dev บน port อื่น
+12. **ล็อกอินก่อนเทส E2E:** ทุกหน้า (ยกเว้น /login) ถูก AuthGuard เด้งไป login หลัง session หมด/full reload — เทสต้องล็อกอินด้วย สมชาย/123456 ก่อนเสมอ

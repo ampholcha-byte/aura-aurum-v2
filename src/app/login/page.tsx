@@ -61,9 +61,8 @@ function LoginForm() {
                 <input
                   id="username"
                   type="text"
-                  inputMode="tel"
                   autoComplete="username"
-                  placeholder="08X-XXX-XXXX หรือรหัสสมาชิก"
+                  placeholder="ชื่อสมาชิก หรือ 08X-XXX-XXXX"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   className={inputCls}

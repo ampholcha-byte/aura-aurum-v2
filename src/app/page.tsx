@@ -27,10 +27,10 @@ export default function Home() {
     <>
       {/* Top App Bar */}
       <header className="flex items-center gap-3 px-4 pt-4">
-        {/* ตราเหรียญทอง DEEGGOLD (โลโก้จริง) */}
+        {/* ตราเหรียญทอง DEEGOLD (โลโก้จริง) */}
         <Image
           src="/images/brand/logo.png"
-          alt="DEEGGOLD"
+          alt="DEEGOLD"
           width={40}
           height={40}
           priority
@@ -38,7 +38,7 @@ export default function Home() {
         />
         <div className="min-w-0 flex-1">
           <p className="font-[Plus_Jakarta_Sans] text-lg font-extrabold leading-tight tracking-wide text-[#8A6715]">
-            DEEG<span className="text-[#B8860B]">GOLD</span>
+            DEE<span className="text-[#B8860B]">GOLD</span>
           </p>
           <p className="text-[11px] font-semibold leading-tight text-espresso">
             ห้างทองดีเยาวราช

@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Phone, Lock, Eye, EyeOff, MessageCircle, AlertCircle } from "lucide-react";
 import { useAuthStore } from "@/stores/useAuthStore";
 
-/** หน้าเข้าสู่ระบบ — การ์ดกลางจอธีม DEEGGOLD (mock auth: สมชาย / 123456 หรือเบอร์ 081-234-5678) */
+/** หน้าเข้าสู่ระบบ — การ์ดกลางจอธีม DEEGOLD (mock auth: สมชาย / 123456 หรือเบอร์ 081-234-5678) */
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -39,7 +39,7 @@ function LoginForm() {
           <div className="flex flex-col items-center text-center">
             <Image
               src="/images/brand/logo.png"
-              alt="DEEGGOLD"
+              alt="DEEGOLD"
               width={72}
               height={72}
               priority
@@ -148,7 +148,7 @@ function LoginForm() {
       {/* Footer */}
       <footer className="pb-5 text-center">
         <p className="text-[11px] text-secondary/80">
-          © ห้างทองดีเยาวราช (DEEGGOLD) All Rights Reserved.
+          © ห้างทองดีเยาวราช (DEEGOLD) All Rights Reserved.
         </p>
       </footer>
     </div>

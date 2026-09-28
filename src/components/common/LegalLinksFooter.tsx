@@ -101,7 +101,7 @@ export default function LegalLinksFooter() {
               </a>
             )}
             <p className="mt-4 text-center text-[10px] text-secondary/70">
-              ห้างทองดีเยาวราช (DEEGGOLD) · ฉบับแสดงบนแอปพลิเคชัน
+              ห้างทองดีเยาวราช (DEEGOLD) · ฉบับแสดงบนแอปพลิเคชัน
             </p>
           </div>
         </div>

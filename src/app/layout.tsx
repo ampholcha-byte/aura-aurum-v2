@@ -4,7 +4,7 @@ import MobileAppFrame from "@/components/common/MobileAppFrame";
 import AuthGuard from "@/components/common/AuthGuard";
 
 export const metadata: Metadata = {
-  title: "DEEGGOLD — ออมทองออนไลน์",
+  title: "DEEGOLD — ออมทองออนไลน์",
   description: "ห้างทองดีเยาวราช ระบบออมทองคำแท่ง 96.5% ออนไลน์",
 };
 

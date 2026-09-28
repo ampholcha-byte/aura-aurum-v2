@@ -31,16 +31,20 @@ export default function Home() {
         <Image
           src="/images/brand/logo.png"
           alt="DEEGGOLD"
-          width={44}
-          height={44}
+          width={40}
+          height={40}
           priority
-          className="h-11 w-11 shrink-0 drop-shadow-[0_4px_12px_rgba(122,15,26,0.25)]"
+          className="h-10 w-10 shrink-0 drop-shadow-[0_4px_12px_rgba(122,15,26,0.25)]"
         />
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-bold leading-tight text-espresso">ทองแท่ง 96.5%</p>
-          <p className="text-[11px] font-semibold leading-tight text-[#8A6715]">By DEEGGOLD</p>
+          <p className="font-[Plus_Jakarta_Sans] text-lg font-extrabold leading-tight tracking-wide text-[#8A6715]">
+            DEEG<span className="text-[#B8860B]">GOLD</span>
+          </p>
+          <p className="text-[11px] font-semibold leading-tight text-espresso">
+            ห้างทองดีเยาวราช
+          </p>
         </div>
-        <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-emerald/10 px-2.5 py-1 text-[10px] font-semibold text-emerald">
+        <span className="inline-flex shrink-0 items-center gap-1 self-center rounded-full bg-emerald/10 px-2.5 py-1 text-[10px] font-semibold text-emerald">
           <Check size={11} /> ยืนยันเบอร์โทรแล้ว
         </span>
         <button

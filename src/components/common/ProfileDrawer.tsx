@@ -12,6 +12,22 @@ import { LEGAL_DOCS } from "@/data/legal/legalDocs";
 /** รหัสพอร์ต mock (ตามสเปก — ภายหลังดึงจาก backend) */
 const PORT_CODE = "58405";
 
+/** key localStorage สำหรับตั้งค่าการแจ้งเตือน (คงค่าข้ามหน้า/ reload) */
+const NOTIF_KEY = "deegold-notif-settings";
+const DEFAULT_NOTIF = { savings: true, plan: true, system: false, sound: false };
+type NotifState = typeof DEFAULT_NOTIF;
+
+/** เวลาเลื่อนออก (ms) — มากกว่า duration-300 ของ transition เล็กน้อย กันถอด DOM ก่อนแอนิเมชันจบจริง */
+const EXIT_MS = 340;
+
+/** ตัวอักษรย่อจากชื่อ — ตัดคำนำหน้าภาษาไทยแบบปลอดภัย ไม่ฟันธงตำแหน่งคงที่แบบ charAt(3) */
+function nameInitial(name: string): string {
+  const trimmed = name.trim();
+  if (!trimmed) return "?";
+  const withoutTitle = trimmed.replace(/^(นาย|นางสาว|นาง|เด็กชาย|เด็กหญิง|ด\.ช\.|ด\.ญ\.)\s*/, "");
+  return withoutTitle.trim().charAt(0) || trimmed.charAt(0) || "?";
+}
+
 /** ปุ่ม Toggle Switch โทนทอง DEEGOLD */
 function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label: string }) {
   return (
@@ -42,33 +58,64 @@ export default function ProfileDrawer({ open, onClose }: Props) {
   const member = useAuthStore((s) => s.member);
   const logout = useAuthStore((s) => s.logout);
 
-  // แอนิเมชันเข้าออก (slide จากขวา)
+  // แอนิเมชันเข้าออก (slide จากขวา) — mounted ค้าง DOM ไว้ระหว่างเลื่อนออก จึงไม่หายวับทันที
+  const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
   const [logoutAsk, setLogoutAsk] = useState(false);
   const [legalKey, setLegalKey] = useState<"privacy" | "terms" | null>(null);
-  const [notif, setNotif] = useState({ savings: true, plan: true, system: false, sound: false });
+  const [notif, setNotif] = useState<NotifState>(DEFAULT_NOTIF);
 
+  // เปิด: mount DOM (ยังเลื่อนค้างนอกจอ) แล้วค่อย setVisible ในเฟรมถัดไป — ปิด: เลื่อนออกให้จบก่อนแล้วค่อยถอด DOM
   useEffect(() => {
     if (open) {
-      requestAnimationFrame(() => setVisible(true));
+      setMounted(true);
+      const raf = requestAnimationFrame(() => setVisible(true));
       document.body.style.overflow = "hidden";
-    } else {
-      setVisible(false);
-      document.body.style.overflow = "";
+      return () => {
+        cancelAnimationFrame(raf);
+        document.body.style.overflow = "";
+      };
     }
-    return () => {
-      document.body.style.overflow = "";
-    };
+    setVisible(false);
+    document.body.style.overflow = "";
+    const timer = setTimeout(() => setMounted(false), EXIT_MS);
+    return () => clearTimeout(timer);
   }, [open]);
 
+  // Esc: ปิดจากชั้นบนสุดก่อน (modal เอกสาร → dialog ยืนยัน → drawer) — ไม่ใช่ปิดทั้ง stack ทีเดียว
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      if (legalKey) setLegalKey(null);
+      else if (logoutAsk) setLogoutAsk(false);
+      else onClose();
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
+  }, [open, legalKey, logoutAsk, onClose]);
 
-  if (!open) return null;
+  // โหลดตั้งค่าแจ้งเตือนที่บันทึกไว้ตอน mount (client เท่านั้น — ค่า default ตรงกันตอน SSR จึงไม่ชน hydration)
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(NOTIF_KEY);
+      if (!raw) return;
+      const parsed: unknown = JSON.parse(raw);
+      if (typeof parsed !== "object" || parsed === null) return;
+      const saved = parsed as Record<string, unknown>;
+      setNotif((cur) => {
+        const next = { ...cur };
+        (Object.keys(cur) as (keyof NotifState)[]).forEach((k) => {
+          if (typeof saved[k] === "boolean") next[k] = saved[k];
+        });
+        return next;
+      });
+    } catch {
+      /* ค่าเสียหาย/อ่านไม่ได้ — ใช้ DEFAULT_NOTIF */
+    }
+  }, []);
+
+  if (!mounted) return null;
 
   const name = member?.name ?? "นายสมชาย มั่งคั่งกิจ";
   const phone = member?.phone ?? "081-234-5678";
@@ -83,6 +130,17 @@ export default function ProfileDrawer({ open, onClose }: Props) {
   const goProfile = () => {
     onClose();
     router.push("/profile");
+  };
+
+  /** สลับค่า + บันทึกลง localStorage ทันที ให้คงอยู่แม้เปลี่ยนหน้า/ reload */
+  const updateNotif = (key: keyof NotifState, value: boolean) => {
+    const next: NotifState = { ...notif, [key]: value };
+    setNotif(next);
+    try {
+      window.localStorage.setItem(NOTIF_KEY, JSON.stringify(next));
+    } catch {
+      /* storage เต็ม/ถูกบล็อก — ค่ารอบนี้ยังใช้ได้ในหน้า */
+    }
   };
 
   const notifItems: { key: keyof typeof notif; label: string; sub: string; icon: typeof Bell }[] = [
@@ -107,19 +165,20 @@ export default function ProfileDrawer({ open, onClose }: Props) {
         aria-hidden
         onClick={onClose}
         className={`fixed inset-0 z-50 bg-black/40 backdrop-blur-sm transition-opacity duration-300 ${
-          visible ? "opacity-100" : "opacity-0"
+          visible ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       />
 
-      {/* Slide-over panel (ด้านขวา) */}
-      <aside
-        role="dialog"
-        aria-modal="true"
-        aria-label="โปรไฟล์และการตั้งค่า"
-        className={`fixed right-0 top-0 z-50 flex h-full w-[86%] max-w-[360px] flex-col bg-[#FFF8F1] shadow-2xl transition-transform duration-300 ease-out ${
-          visible ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
+      {/* Slide-over panel (ด้านขวา — ชิดขอบกรอบแอป 430/700px บนจอกว้าง ไม่ใช่ขอบ viewport) */}
+      <div className="pointer-events-none fixed inset-0 z-50 mx-auto flex max-w-[430px] justify-end overflow-hidden md:max-w-[700px]">
+        <aside
+          role="dialog"
+          aria-modal="true"
+          aria-label="โปรไฟล์และการตั้งค่า"
+          className={`${visible ? "pointer-events-auto" : "pointer-events-none"} flex h-full w-[86%] max-w-[360px] flex-col bg-[#FFF8F1] shadow-2xl transition-transform duration-300 ease-out ${
+            visible ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
         {/* ปุ่มปิด */}
         <button
           aria-label="ปิด"
@@ -134,7 +193,7 @@ export default function ProfileDrawer({ open, onClose }: Props) {
           <div className="bg-gradient-to-br from-[#7A0F1A] to-[#660C15] px-5 pb-5 pt-6 text-white">
             <div className="flex items-center gap-3 pr-12">
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#F3C343] to-[#B8860B] text-xl font-extrabold shadow-[0_4px_14px_rgba(184,134,11,0.35)]">
-                {name.charAt(3)}
+                {nameInitial(name)}
               </div>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-base font-bold leading-tight">{name}</p>
@@ -203,7 +262,7 @@ export default function ProfileDrawer({ open, onClose }: Props) {
                   <Toggle
                     label={label}
                     checked={notif[key]}
-                    onChange={(v) => setNotif((s) => ({ ...s, [key]: v }))}
+                    onChange={(v) => updateNotif(key, v)}
                   />
                 </div>
               ))}
@@ -231,12 +290,19 @@ export default function ProfileDrawer({ open, onClose }: Props) {
             </div>
           </footer>
         </div>
-      </aside>
+        </aside>
+      </div>
 
       {/* Dialog ยืนยันออกจากระบบ */}
       {logoutAsk && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 px-6 backdrop-blur-sm">
-          <div className="w-full max-w-[340px] rounded-2xl bg-white p-5 text-center">
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 px-6 backdrop-blur-sm"
+          onClick={() => setLogoutAsk(false)}
+        >
+          <div
+            className="w-full max-w-[340px] rounded-2xl bg-white p-5 text-center"
+            onClick={(e) => e.stopPropagation()}
+          >
             <p className="text-base font-bold text-espresso">ออกจากระบบ?</p>
             <p className="mt-1 text-xs text-secondary">คุณจะต้องเข้าสู่ระบบอีกครั้งเพื่อใช้งาน</p>
             <div className="mt-4 grid grid-cols-2 gap-2">
